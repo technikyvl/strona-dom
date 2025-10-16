@@ -62,7 +62,7 @@ export function HeroSection() {
                 <div key={i} className="bg-black/40 backdrop-blur-sm p-6 border-t border-white/20">
                   <p className="text-white/80 text-sm mb-4 leading-relaxed">{card.text}</p>
                   <a href={card.href} className="inline-flex">
-                    <button className="flex items-center gap-2 text-white text-sm font-medium uppercase tracking-wider hover:text-primary transition-all duration-300 hover:gap-3 group">
+                    <button className="flex items-center gap-2 text-white text-sm font-medium uppercase tracking-wider hover:text-primary transition-all duration-300 hover:gap-3 group rounded-full px-4 py-2 bg-white/10 hover:bg-white/15 ring-1 ring-inset ring-white/20">
                       {card.cta}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
