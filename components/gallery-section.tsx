@@ -1,7 +1,7 @@
 import { useInView } from "@/lib/use-in-view"
 
 export function GallerySection() {
-  const { ref, inView } = useInView({ threshold: 0.1 })
+  const { ref, inView } = useInView({ threshold: 0.1, once: false })
   const images = [
     "/dom na zewnatrz 2-kopia.jpeg",
     "/salon 1-kopia.jpeg",
@@ -15,7 +15,7 @@ export function GallerySection() {
     <section
       id="galeria"
       ref={ref as any}
-      className={`py-24 bg-gradient-to-b from-[#1a1e2e] to-[#0a0e1a] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      className={`py-24 bg-gradient-to-b from-[#1a1e2e] to-[#0a0e1a] transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">

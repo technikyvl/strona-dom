@@ -1,12 +1,12 @@
 import { useInView } from "@/lib/use-in-view"
 
 export function ContactSection() {
-  const { ref, inView } = useInView({ threshold: 0.1 })
+  const { ref, inView } = useInView({ threshold: 0.1, once: false })
   return (
     <section
       id="kontakt"
       ref={ref as any}
-      className={`py-24 bg-[#0a0e1a] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      className={`py-24 bg-[#0a0e1a] transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-10">

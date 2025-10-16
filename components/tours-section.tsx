@@ -29,12 +29,12 @@ const features = [
 ]
 
 export function ToursSection() {
-  const { ref, inView } = useInView({ threshold: 0.15 })
+  const { ref, inView } = useInView({ threshold: 0.15, once: false })
   return (
     <section
       id="udogodnienia"
       ref={ref as any}
-      className={`py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      className={`py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e] transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
     >
       <div className="container mx-auto px-6">
         {/* Section Header */}

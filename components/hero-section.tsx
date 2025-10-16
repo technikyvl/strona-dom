@@ -8,13 +8,13 @@ export function HeroSection() {
   const [currentSlide] = useState(3)
   const totalSlides = 5
 
-  const { ref, inView } = useInView({ threshold: 0.2 })
+  const { ref, inView } = useInView({ threshold: 0.2, once: false })
 
   return (
     <section
       id="dom"
       ref={ref as any}
-      className={`relative h-screen w-full overflow-hidden transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      className={`relative h-screen w-full overflow-hidden transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
     >
       {/* Background Image */}
       <div className="absolute inset-0">
