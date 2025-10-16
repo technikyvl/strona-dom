@@ -21,48 +21,48 @@ export function Header() {
       <div className="fixed left-0 right-0 bottom-4 z-50">
         <Dock panelHeight={64} backgroundOpacity={0.9} blur>
           <DockItem>
-            <DockLabel isHovered={{} as any}>Главная</DockLabel>
-            <DockIcon width={{} as any}>
+            <DockLabel>Главная</DockLabel>
+            <DockIcon>
               <Link href="#" className="text-white">
                 <Home className="size-6" />
               </Link>
             </DockIcon>
           </DockItem>
           <DockItem>
-            <DockLabel isHovered={{} as any}>О нас</DockLabel>
-            <DockIcon width={{} as any}>
+            <DockLabel>О нас</DockLabel>
+            <DockIcon>
               <Link href="#" className="text-white">
                 <Info className="size-6" />
               </Link>
             </DockIcon>
           </DockItem>
           <DockItem>
-            <DockLabel isHovered={{} as any}>Туры</DockLabel>
-            <DockIcon width={{} as any}>
+            <DockLabel>Туры</DockLabel>
+            <DockIcon>
               <Link href="#" className="text-white">
                 <Compass className="size-6" />
               </Link>
             </DockIcon>
           </DockItem>
           <DockItem>
-            <DockLabel isHovered={{} as any}>Галерея</DockLabel>
-            <DockIcon width={{} as any}>
+            <DockLabel>Галерея</DockLabel>
+            <DockIcon>
               <Link href="#" className="text-white">
                 <Images className="size-6" />
               </Link>
             </DockIcon>
           </DockItem>
           <DockItem>
-            <DockLabel isHovered={{} as any}>Контакты</DockLabel>
-            <DockIcon width={{} as any}>
+            <DockLabel>Контакты</DockLabel>
+            <DockIcon>
               <Link href="#" className="text-white">
                 <Mail className="size-6" />
               </Link>
             </DockIcon>
           </DockItem>
           <DockItem>
-            <DockLabel isHovered={{} as any}>Поиск</DockLabel>
-            <DockIcon width={{} as any}>
+            <DockLabel>Поиск</DockLabel>
+            <DockIcon>
               <button className="text-white">
                 <Search className="size-6" />
               </button>
