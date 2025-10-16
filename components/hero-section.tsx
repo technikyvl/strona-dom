@@ -11,11 +11,7 @@ export function HeroSection() {
   const { ref, inView } = useInView({ threshold: 0.2, once: false })
 
   return (
-    <section
-      id="dom"
-      ref={ref as any}
-      className={`relative h-screen w-full overflow-hidden transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-    >
+    <section id="dom" ref={ref as any} className="relative h-screen w-full overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -28,7 +24,7 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative h-full container mx-auto px-6">
+      <div className={`relative h-full container mx-auto px-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="flex items-center h-full">
           <div className="max-w-2xl" />
         </div>
