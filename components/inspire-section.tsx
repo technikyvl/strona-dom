@@ -1,3 +1,5 @@
+"use client"
+
 import { Play } from "lucide-react"
 import { useInView } from "@/lib/use-in-view"
 

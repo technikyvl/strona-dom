@@ -1,3 +1,5 @@
+"use client"
+
 import { useInView } from "@/lib/use-in-view"
 
 export function ContactSection() {
