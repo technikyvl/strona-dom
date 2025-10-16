@@ -12,7 +12,7 @@ export function ContactSection() {
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Kontakt</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white font-serif-brand">Kontakt</h2>
           <p className="text-white/60 mt-3">Zapytaj o dostępność i wycenę pobytu</p>
         </div>
 
