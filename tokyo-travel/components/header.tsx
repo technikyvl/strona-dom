@@ -1,6 +1,5 @@
-import { Search, Home, Info, Plane, Images, MessageSquare, Phone } from "lucide-react"
+import { Search } from "lucide-react"
 import Link from "next/link"
-import { Dock, DockItem, DockIcon, DockLabel } from "@/components/dock"
 
 export function Header() {
   return (
@@ -13,35 +12,45 @@ export function Header() {
             <span className="text-white font-bold text-lg tracking-wider uppercase">Travel</span>
           </Link>
 
-          {/* Navigation replaced with Dock */}
-          <div className="hidden md:flex">
-            <Dock blur={8} backgroundOpacity={0.2} className="bg-white/10 dark:bg-black/10">
-              <DockItem>
-                <DockIcon className="text-white"><Home className="w-full h-full" /></DockIcon>
-                <DockLabel className="">Главная</DockLabel>
-              </DockItem>
-              <DockItem>
-                <DockIcon className="text-white"><Info className="w-full h-full" /></DockIcon>
-                <DockLabel>О нас</DockLabel>
-              </DockItem>
-              <DockItem>
-                <DockIcon className="text-white"><Plane className="w-full h-full" /></DockIcon>
-                <DockLabel>Туры</DockLabel>
-              </DockItem>
-              <DockItem>
-                <DockIcon className="text-white"><Images className="w-full h-full" /></DockIcon>
-                <DockLabel>Галерея</DockLabel>
-              </DockItem>
-              <DockItem>
-                <DockIcon className="text-white"><MessageSquare className="w-full h-full" /></DockIcon>
-                <DockLabel>Отзывы</DockLabel>
-              </DockItem>
-              <DockItem>
-                <DockIcon className="text-white"><Phone className="w-full h-full" /></DockIcon>
-                <DockLabel>Контакты</DockLabel>
-              </DockItem>
-            </Dock>
-          </div>
+          {/* Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link
+              href="#"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
+            >
+              Главная
+            </Link>
+            <Link
+              href="#"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
+            >
+              О нас
+            </Link>
+            <Link
+              href="#"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
+            >
+              Туры
+            </Link>
+            <Link
+              href="#"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
+            >
+              Галерея
+            </Link>
+            <Link
+              href="#"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
+            >
+              Отзывы
+            </Link>
+            <Link
+              href="#"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
+            >
+              Контакты
+            </Link>
+          </nav>
 
           {/* Search Icon */}
           <button className="text-white/90 hover:text-white transition-all duration-300 hover:scale-110 hover:rotate-12">
