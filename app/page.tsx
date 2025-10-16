@@ -4,6 +4,7 @@ import { ToursSection } from "@/components/tours-section"
 import { InspireSection } from "@/components/inspire-section"
 import { GallerySection } from "@/components/gallery-section"
 import { ContactSection } from "@/components/contact-section"
+import { StaggerTestimonials } from "@/components/ui/stagger-testimonials"
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <ToursSection />
       <InspireSection />
       <GallerySection />
+      <StaggerTestimonials />
       <ContactSection />
     </main>
   )
