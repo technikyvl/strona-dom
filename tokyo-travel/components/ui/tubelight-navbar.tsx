@@ -1,8 +1,10 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
+
+function cn(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ")
+}
 
 type LucideIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
@@ -57,7 +59,7 @@ export function NavBar({ items, className }: NavBarProps) {
           const Icon = item.icon
           return (
             <li key={item.name} className="relative z-10">
-              <Link
+              <a
                 href={item.url}
                 ref={(el) => (itemRefs.current[index] = el)}
                 onMouseEnter={() => updateIndicatorToIndex(index)}
@@ -74,7 +76,7 @@ export function NavBar({ items, className }: NavBarProps) {
               >
                 {Icon ? <Icon className="h-4 w-4" /> : null}
                 <span className="uppercase tracking-wide">{item.name}</span>
-              </Link>
+              </a>
             </li>
           )
         })}
