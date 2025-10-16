@@ -233,10 +233,12 @@ export const StaggerTestimonials: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className="relative w-full overflow-hidden bg-muted/30"
-      style={{ height: 600 }}
-    >
+    <section className="py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e]">
+      <div className="container mx-auto px-6">
+        <div
+          className="relative w-full overflow-hidden rounded-xl ring-1 ring-white/5 bg-transparent"
+          style={{ height: 600 }}
+        >
       {testimonialsList.map((testimonial, index) => {
         const position = testimonialsList.length % 2
           ? index - (testimonialsList.length + 1) / 2
@@ -275,7 +277,9 @@ export const StaggerTestimonials: React.FC = () => {
           <ChevronRight />
         </button>
       </div>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
