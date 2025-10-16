@@ -5,25 +5,25 @@ const features = [
     id: 1,
     title: "Sauna",
     subtitle: "Duża sauna bez dodatkowych opłat",
-    image: "/mountain-lake-reflection-sunset-landscape.jpg",
+    image: "/sauna.jpg",
   },
   {
     id: 2,
     title: "Salon i kuchnia",
     subtitle: "75'' TV, Netflix, w pełni wyposażona kuchnia",
-    image: "/mount-fuji-with-cherry-blossoms-black-and-white.jpg",
+    image: "/salon.jpg",
   },
   {
     id: 3,
     title: "Taras i grill",
     subtitle: "Przestronny taras z grillem gazowym",
-    image: "/red-japanese-pagoda-with-cherry-blossoms-spring.jpg",
+    image: "/taras.jpg",
   },
   {
     id: 4,
     title: "Narciarnia",
     subtitle: "Przechowywanie sprzętu i suszarka do butów",
-    image: "/people-with-red-umbrellas-in-rain-japan-street.jpg",
+    image: "/narciarnia.jpg",
   },
 ]
 

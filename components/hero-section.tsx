@@ -12,8 +12,8 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/snowy-mountain-peaks-winter-landscape.jpg"
-          alt="Szczyrk, górski krajobraz"
+          src="/home-outside.jpg"
+          alt="Dom z zewnątrz – Highlander House Szczyrk"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
