@@ -1,90 +1,87 @@
 "use client"
 
-import * as React from "react"
+import React, { useEffect, useState } from "react"
+import { motion } from "framer-motion"
+import Link from "next/link"
+import { LucideIcon } from "lucide-react"
+import { cn } from "@/lib/utils"
 
-function cn(...classes: Array<string | false | null | undefined>) {
-  return classes.filter(Boolean).join(" ")
-}
-
-type LucideIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
-
-export type NavBarItem = {
+interface NavItem {
   name: string
   url: string
-  icon?: LucideIcon
+  icon: LucideIcon
 }
 
-type NavBarProps = {
-  items: NavBarItem[]
+interface NavBarProps {
+  items: NavItem[]
   className?: string
 }
 
 export function NavBar({ items, className }: NavBarProps) {
-  const containerRef = React.useRef<HTMLUListElement | null>(null)
-  const itemRefs = React.useRef<Array<HTMLAnchorElement | null>>([])
-  const [indicator, setIndicator] = React.useState<{ left: number; width: number }>({ left: 0, width: 0 })
-  const [activeIndex, setActiveIndex] = React.useState<number>(0)
+  const [activeTab, setActiveTab] = useState(items[0].name)
+  const [isMobile, setIsMobile] = useState(false)
 
-  const updateIndicatorToIndex = React.useCallback(
-    (index: number) => {
-      const el = itemRefs.current[index]
-      const container = containerRef.current
-      if (!el || !container) return
-      const elRect = el.getBoundingClientRect()
-      const containerRect = container.getBoundingClientRect()
-      setIndicator({ left: elRect.left - containerRect.left, width: elRect.width })
-    },
-    []
-  )
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
 
-  React.useEffect(() => {
-    // Initialize to the active index on mount and on resize
-    updateIndicatorToIndex(activeIndex)
-    const onResize = () => updateIndicatorToIndex(activeIndex)
-    window.addEventListener("resize", onResize)
-    return () => window.removeEventListener("resize", onResize)
-  }, [activeIndex, updateIndicatorToIndex])
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   return (
-    <nav className={cn("relative", className)}>
-      <ul ref={containerRef} className="relative mx-auto flex items-center gap-2 rounded-full bg-white/5 px-2 py-1 backdrop-blur-md ring-1 ring-white/10">
-        {/* Tubelight indicator */}
-        <li className="pointer-events-none absolute left-0 top-0 h-full" aria-hidden>
-          <div
-            className="absolute bottom-0 h-9 rounded-full bg-white/10 ring-1 ring-white/20 transition-[transform,width] duration-300 ease-out"
-            style={{ transform: `translateX(${indicator.left}px)`, width: `${indicator.width}px` }}
-          />
-        </li>
-        {items.map((item, index) => {
+    <div
+      className={cn(
+        "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
+        className,
+      )}
+    >
+      <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+        {items.map((item) => {
           const Icon = item.icon
+          const isActive = activeTab === item.name
+
           return (
-            <li key={item.name} className="relative z-10">
-              <a
-                href={item.url}
-                ref={(el) => (itemRefs.current[index] = el)}
-                onMouseEnter={() => updateIndicatorToIndex(index)}
-                onFocus={() => updateIndicatorToIndex(index)}
-                onMouseLeave={() => updateIndicatorToIndex(activeIndex)}
-                onClick={() => {
-                  setActiveIndex(index)
-                  updateIndicatorToIndex(index)
-                }}
-                className={cn(
-                  "flex items-center gap-2 rounded-full px-4 py-2 text-sm text-white/90 transition-colors",
-                  index === activeIndex ? "text-white" : "hover:text-white"
-                )}
-              >
-                {Icon ? <Icon className="h-4 w-4" /> : null}
-                <span className="uppercase tracking-wide">{item.name}</span>
-              </a>
-            </li>
+            <Link
+              key={item.name}
+              href={item.url}
+              onClick={() => setActiveTab(item.name)}
+              className={cn(
+                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
+                "text-foreground/80 hover:text-primary",
+                isActive && "bg-muted text-primary",
+              )}
+            >
+              <span className="hidden md:inline">{item.name}</span>
+              <span className="md:hidden">
+                <Icon size={18} strokeWidth={2.5} />
+              </span>
+              {isActive && (
+                <motion.div
+                  layoutId="lamp"
+                  className="absolute inset-0 w-full bg-primary/5 rounded-full -z-10"
+                  initial={false}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  }}
+                >
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-t-full">
+                    <div className="absolute w-12 h-6 bg-primary/20 rounded-full blur-md -top-2 -left-2" />
+                    <div className="absolute w-8 h-6 bg-primary/20 rounded-full blur-md -top-1" />
+                    <div className="absolute w-4 h-4 bg-primary/20 rounded-full blur-sm top-0 left-2" />
+                  </div>
+                </motion.div>
+              )}
+            </Link>
           )
         })}
-      </ul>
-    </nav>
+      </div>
+    </div>
   )
 }
-
-export default NavBar
 
 
