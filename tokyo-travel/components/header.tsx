@@ -1,5 +1,6 @@
-import { Search } from "lucide-react"
+import { Search, Home, User, Briefcase, FileText } from "lucide-react"
 import Link from "next/link"
+import { NavBar } from "@/components/ui/tubelight-navbar"
 
 export function Header() {
   return (
@@ -13,44 +14,16 @@ export function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link
-              href="#"
-              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
-            >
-              Главная
-            </Link>
-            <Link
-              href="#"
-              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
-            >
-              О нас
-            </Link>
-            <Link
-              href="#"
-              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
-            >
-              Туры
-            </Link>
-            <Link
-              href="#"
-              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
-            >
-              Галерея
-            </Link>
-            <Link
-              href="#"
-              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
-            >
-              Отзывы
-            </Link>
-            <Link
-              href="#"
-              className="text-white/90 hover:text-white text-sm uppercase tracking-wide transition-all duration-300 hover:scale-110"
-            >
-              Контакты
-            </Link>
-          </nav>
+          <div className="hidden md:block">
+            <NavBar
+              items={[
+                { name: "Home", url: "#", icon: Home },
+                { name: "About", url: "#", icon: User },
+                { name: "Projects", url: "#", icon: Briefcase },
+                { name: "Resume", url: "#", icon: FileText },
+              ]}
+            />
+          </div>
 
           {/* Search Icon */}
           <button className="text-white/90 hover:text-white transition-all duration-300 hover:scale-110 hover:rotate-12">
