@@ -5,25 +5,25 @@ const features = [
     id: 1,
     title: "Sauna",
     subtitle: "Duża sauna bez dodatkowych opłat",
-    image: "/sauna.jpg",
+    image: "/sauna 1-kopia.jpeg",
   },
   {
     id: 2,
     title: "Salon i kuchnia",
     subtitle: "75'' TV, Netflix, w pełni wyposażona kuchnia",
-    image: "/salon.jpg",
+    image: "/salon 2-kopia.jpeg",
   },
   {
     id: 3,
     title: "Taras i grill",
     subtitle: "Przestronny taras z grillem gazowym",
-    image: "/taras.jpg",
+    image: "/plac zabaw-kopia.jpeg",
   },
   {
     id: 4,
     title: "Narciarnia",
     subtitle: "Przechowywanie sprzętu i suszarka do butów",
-    image: "/narciarnia.jpg",
+    image: "/suszarnia-kopia.jpeg",
   },
 ]
 

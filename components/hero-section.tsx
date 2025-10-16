@@ -12,7 +12,7 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/home-outside.jpg"
+          src="/dom na zewnatrz-kopia.jpeg"
           alt="Dom z zewnątrz – Highlander House Szczyrk"
           className="w-full h-full object-cover"
         />

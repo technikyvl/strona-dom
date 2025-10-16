@@ -1,11 +1,11 @@
 export function GallerySection() {
   const images = [
-    "/gallery-1.jpg",
-    "/gallery-2.jpg",
-    "/gallery-3.jpg",
-    "/gallery-4.jpg",
-    "/gallery-5.jpg",
-    "/gallery-6.jpg",
+    "/dom na zewnatrz 2-kopia.jpeg",
+    "/salon 1-kopia.jpeg",
+    "/salon 3-kopia.jpeg",
+    "/salon 4-kopia.jpeg",
+    "/3 sypialnia 1-kopia.jpeg",
+    "/4 sypialnia 2-kopia.jpeg",
   ]
 
   return (
