@@ -2,6 +2,8 @@ import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { ToursSection } from "@/components/tours-section"
 import { InspireSection } from "@/components/inspire-section"
+import { GallerySection } from "@/components/gallery-section"
+import { ContactSection } from "@/components/contact-section"
 
 export default function Home() {
   return (
@@ -10,6 +12,8 @@ export default function Home() {
       <HeroSection />
       <ToursSection />
       <InspireSection />
+      <GallerySection />
+      <ContactSection />
     </main>
   )
 }
