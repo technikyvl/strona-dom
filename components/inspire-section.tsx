@@ -6,11 +6,7 @@ import { useInView } from "@/lib/use-in-view"
 export function InspireSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: false })
   return (
-    <section
-      id="lokalizacja"
-      ref={ref as any}
-      className={`relative min-h-screen w-full overflow-hidden transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-    >
+    <section id="lokalizacja" ref={ref as any} className="relative min-h-screen w-full overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -22,7 +18,7 @@ export function InspireSection() {
       </div>
 
       {/* Content */}
-      <div className="relative h-full min-h-screen container mx-auto px-6 py-24">
+      <div className={`relative h-full min-h-screen container mx-auto px-6 py-24 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
           {/* Left Content */}
           <div className="flex-1 max-w-2xl">

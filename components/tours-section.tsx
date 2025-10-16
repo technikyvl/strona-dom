@@ -33,20 +33,16 @@ const features = [
 export function ToursSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: false })
   return (
-    <section
-      id="udogodnienia"
-      ref={ref as any}
-      className={`py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e] transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-    >
+    <section id="udogodnienia" ref={ref as any} className="py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e]">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <p className="text-white/60 text-sm uppercase tracking-widest mb-3">Wszystko, czego potrzebujesz na wyjazd</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white font-serif-brand">Udogodnienia</h2>
         </div>
 
         {/* Tours Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {features.map((feature) => (
             <Card
               key={feature.id}
