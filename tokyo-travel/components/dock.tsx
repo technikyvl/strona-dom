@@ -139,7 +139,9 @@ export type DockItemChildProps = {
 
 export type DockItemProps = {
   className?: string
-  children: ReactElement<DockItemChildProps> | Array<ReactElement<DockItemChildProps>>
+  children:
+    | ReactElement<Partial<DockItemChildProps>>
+    | Array<ReactElement<Partial<DockItemChildProps>>>
 }
 
 // DockItem: computes distance from cursor and springs width accordingly
@@ -175,7 +177,7 @@ export function DockItem({ children, className }: DockItemProps) {
       role="button"
       aria-haspopup="true"
     >
-      {Children.map(children as ReactElement<DockItemChildProps>[], (child) =>
+      {Children.map(children as ReactElement<Partial<DockItemChildProps>>[], (child) =>
         cloneElement<Partial<DockItemChildProps>>(child, { width, isHovered }),
       )}
     </motion.div>
@@ -185,7 +187,8 @@ export function DockItem({ children, className }: DockItemProps) {
 export type DockLabelProps = {
   className?: string
   children: React.ReactNode
-  isHovered: MotionValue<number>
+  // Injected by DockItem via cloneElement
+  isHovered?: MotionValue<number>
 }
 
 // DockLabel: appears above an item when hovered
@@ -194,6 +197,7 @@ export function DockLabel({ children, className, isHovered }: DockLabelProps) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    if (!isHovered) return
     const unsubscribe = isHovered.on("change", (latest) => {
       setIsVisible(latest === 1)
     })
@@ -225,12 +229,13 @@ export function DockLabel({ children, className, isHovered }: DockLabelProps) {
 export type DockIconProps = {
   className?: string
   children: React.ReactNode
-  width: MotionValue<number>
+  // Injected by DockItem via cloneElement
+  width?: MotionValue<number>
 }
 
 // DockIcon: scales icon container based on half of item width
 export function DockIcon({ children, className, width }: DockIconProps) {
-  const halfWidth = useTransform(width, (val) => val / 2)
+  const halfWidth = useTransform(width ?? 40, (val) => Number(val) / 2)
 
   return (
     <motion.div style={{ width: halfWidth }} className={cn("flex items-center justify-center", className)}>
