@@ -236,7 +236,7 @@ export const StaggerTestimonials: React.FC = () => {
     <section className="py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e]">
       <div className="container mx-auto px-6">
         <div
-          className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-2xl ring-1 ring-white/5 bg-transparent will-change-transform drift"
+          className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-2xl ring-1 ring-white/5 bg-transparent"
           style={{ height: 560 }}
         >
       {testimonialsList.map((testimonial, index) => {
@@ -282,16 +282,5 @@ export const StaggerTestimonials: React.FC = () => {
     </section>
   );
 };
-
-/* styled-jsx for lightweight drift animation */
-export default function styled() { return null }
-
-<style jsx>{`
-  @keyframes drift {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-80px); }
-  }
-  .drift { animation: drift 40s linear infinite; }
-`}</style>
 
 
