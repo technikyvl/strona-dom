@@ -20,10 +20,7 @@ export function GallerySection() {
       className={`py-24 bg-gradient-to-b from-[#1a1e2e] to-[#0a0e1a] transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
     >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Galeria</h2>
-          <p className="text-white/60 mt-3">Zobacz wnętrza i otoczenie domu</p>
-        </div>
+        <div className="text-center mb-12" />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((src, idx) => (

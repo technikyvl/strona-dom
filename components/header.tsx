@@ -13,10 +13,10 @@ export function Header() {
           <nav className="flex items-center justify-between gap-4 rounded-2xl border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-xl shadow-lg shadow-black/10 ring-1 ring-white/10">
             {/* Left: Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-white/70 to-white/30 text-black/80 backdrop-blur-md ring-1 ring-white/40">
+              <span className="inline-flex h-7 px-2 items-center justify-center rounded-lg bg-gradient-to-br from-white/70 to-white/30 text-black/80 backdrop-blur-md ring-1 ring-white/40">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary block" />
               </span>
-              <span className="text-white/90 group-hover:text-white transition-colors font-semibold tracking-wide uppercase">Travel</span>
+              <span className="text-white group-hover:text-white transition-colors font-semibold tracking-wide uppercase">Highlander House Szczyrk</span>
             </Link>
 
             {/* Center: Links */}
