@@ -19,8 +19,8 @@ export function HeroSection() {
           alt="Dom z zewnątrz – Highlander House Szczyrk"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a1628]" />
+        {/* smoother, longer bottom gradient into next section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
       </div>
 
       {/* Content */}
@@ -39,8 +39,8 @@ export function HeroSection() {
                 {
                   text:
                     "Sauna, salon z 75'' TV i Netflix, w pełni wyposażona kuchnia oraz duży taras z widokiem.",
-                  cta: "Zobacz galerię",
-                  href: "#galeria",
+                  cta: "Sprawdź udogodnienia",
+                  href: "#udogodnienia",
                 },
                 {
                   text:
