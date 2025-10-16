@@ -26,7 +26,9 @@ export function InspireSection() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
           {/* Left Content */}
           <div className="flex-1 max-w-2xl">
-            <div className="h-8" />
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
+              Szczyrk – blisko stoków i szlaków
+            </h2>
 
             {/* Video Button */}
             <a href="#kontakt" className="inline-flex">
@@ -34,13 +36,18 @@ export function InspireSection() {
               <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm border-2 border-primary flex items-center justify-center group-hover:bg-primary/40 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110">
                 <Play className="w-6 h-6 text-primary fill-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <span className="sr-only">Zapytaj o dostępność</span>
+              <span className="text-white text-sm uppercase tracking-wider font-medium group-hover:text-primary transition-colors duration-300">
+                Zapytaj o dostępność
+              </span>
             </button>
             </a>
 
             {/* Bottom Text */}
             <div className="mt-16">
-              <div className="h-6" />
+              <p className="text-white/70 text-sm leading-relaxed max-w-md">
+                Centrum Szczyrku, spokojna okolica, blisko restauracji i sklepów.
+                Skrzyczne 850 m, SMR 2,8 km, Beskid Sport Arena 2,2 km, SKIBUS 200 m.
+              </p>
             </div>
           </div>
 

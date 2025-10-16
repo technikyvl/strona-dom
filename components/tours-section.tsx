@@ -40,7 +40,10 @@ export function ToursSection() {
     >
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16" />
+        <div className="text-center mb-16">
+          <p className="text-white/60 text-sm uppercase tracking-widest mb-3">Wszystko, czego potrzebujesz na wyjazd</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">Udogodnienia</h2>
+        </div>
 
         {/* Tours Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -59,7 +62,8 @@ export function ToursSection() {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2">
-                  <div className="h-8" />
+                  <h3 className="text-2xl font-bold text-white mb-2">{feature.title}</h3>
+                  <p className="text-white/70 text-sm">{feature.subtitle}</p>
                 </div>
               </div>
             </Card>
