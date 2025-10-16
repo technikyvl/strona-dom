@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { useInView } from "@/lib/use-in-view"
+import { HeroGeometric } from "@/components/ui/shape-landing-hero"
 
 export function HeroSection() {
   const [currentSlide] = useState(3)
@@ -23,16 +24,17 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
       </div>
 
-      {/* Content */}
-      <div className={`relative h-full container mx-auto px-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-        <div className="flex items-center h-full">
-          <div className="max-w-2xl" />
-        </div>
+      {/* Geometric Hero Overlay */}
+      <div className="absolute inset-0">
+        <HeroGeometric 
+          badge="Highlander House"
+          title1="Szczyrk"
+          title2="Górski Dom do Wynajęcia"
+        />
+      </div>
 
-        {/* Quick features removed */}
-
-        {/* Bottom Cards */}
-        <div className="absolute bottom-12 left-6 right-6">
+      {/* Bottom Cards - keeping the same cards */}
+      <div className="absolute bottom-12 left-6 right-6 z-20">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -68,7 +70,6 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   )
 }
