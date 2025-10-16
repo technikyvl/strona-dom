@@ -2,13 +2,20 @@
 
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { useInView } from "@/lib/use-in-view"
 
 export function HeroSection() {
   const [currentSlide] = useState(3)
   const totalSlides = 5
 
+  const { ref, inView } = useInView({ threshold: 0.2 })
+
   return (
-    <section id="dom" className="relative h-screen w-full overflow-hidden">
+    <section
+      id="dom"
+      ref={ref as any}
+      className={`relative h-screen w-full overflow-hidden transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <img

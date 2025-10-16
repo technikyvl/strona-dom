@@ -1,8 +1,14 @@
 import { Play } from "lucide-react"
+import { useInView } from "@/lib/use-in-view"
 
 export function InspireSection() {
+  const { ref, inView } = useInView({ threshold: 0.15 })
   return (
-    <section id="lokalizacja" className="relative min-h-screen w-full overflow-hidden">
+    <section
+      id="lokalizacja"
+      ref={ref as any}
+      className={`relative min-h-screen w-full overflow-hidden transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
