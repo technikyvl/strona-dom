@@ -236,8 +236,8 @@ export const StaggerTestimonials: React.FC = () => {
     <section className="py-24 bg-gradient-to-b from-[#0a0e1a] to-[#1a1e2e]">
       <div className="container mx-auto px-6">
         <div
-          className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-2xl ring-1 ring-white/5 bg-transparent"
-          style={{ height: 560 }}
+          className="relative mx-auto w-full max-w-5xl overflow-visible rounded-2xl ring-1 ring-white/5 bg-transparent"
+          style={{ height: 620 }}
         >
       {testimonialsList.map((testimonial, index) => {
         const position = testimonialsList.length % 2
