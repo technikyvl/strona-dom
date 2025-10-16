@@ -21,7 +21,7 @@ export function GallerySection() {
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Galeria</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white font-serif-brand">Galeria</h2>
           <p className="text-white/60 mt-3">Zobacz wnętrza i otoczenie domu</p>
         </div>
 

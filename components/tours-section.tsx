@@ -42,7 +42,7 @@ export function ToursSection() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <p className="text-white/60 text-sm uppercase tracking-widest mb-3">Wszystko, czego potrzebujesz na wyjazd</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Udogodnienia</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white font-serif-brand">Udogodnienia</h2>
         </div>
 
         {/* Tours Grid */}

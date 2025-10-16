@@ -26,7 +26,7 @@ export function InspireSection() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
           {/* Left Content */}
           <div className="flex-1 max-w-2xl">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-8 font-serif-brand">
               Szczyrk – blisko stoków i szlaków
             </h2>
 
