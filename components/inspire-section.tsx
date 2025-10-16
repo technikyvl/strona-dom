@@ -6,8 +6,8 @@ export function InspireSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/mountain-landscape-with-milky-way-stars-night-sky-.jpg"
-          alt="Szczyrk nocą, górski krajobraz"
+          src="/dom na zewnatrz 2-kopia.jpeg"
+          alt="Dom i otoczenie w Szczyrku"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -49,18 +49,18 @@ export function InspireSection() {
               {/* Image Stack */}
               <div className="relative">
                 <img
-                  src="/people-with-red-umbrellas-in-rain-japan-street.jpg"
-                  alt="Spacer w deszczu"
+                  src="/salon 1-kopia.jpeg"
+                  alt="Salon z częścią wypoczynkową"
                   className="w-full h-auto rounded-lg shadow-2xl"
                 />
                 <img
-                  src="/mountain-lake-reflection-sunset-landscape.jpg"
-                  alt="Zachód słońca w górach"
+                  src="/3 sypialnia 1-kopia.jpeg"
+                  alt="Przytulna sypialnia"
                   className="absolute -bottom-12 -left-12 w-2/3 h-auto rounded-lg shadow-2xl border-4 border-background"
                 />
                 <img
-                  src="/snowy-mountain-peaks-winter-landscape.jpg"
-                  alt="Zimowe szczyty"
+                  src="/sauna 2-kopia.jpeg"
+                  alt="Sauna dla gości"
                   className="absolute -top-12 -right-12 w-2/3 h-auto rounded-lg shadow-2xl border-4 border-background"
                 />
               </div>
