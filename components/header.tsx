@@ -21,12 +21,11 @@ export function Header() {
 
             {/* Center: Links */}
             <div className="hidden md:flex items-center gap-6 text-xs font-medium uppercase tracking-wide">
-              <Link href="#" className="text-white/80 hover:text-white transition-colors">Главная</Link>
-              <Link href="#" className="text-white/80 hover:text-white transition-colors">О нас</Link>
-              <Link href="#" className="text-white/80 hover:text-white transition-colors">Туры</Link>
-              <Link href="#" className="text-white/80 hover:text-white transition-colors">Галерея</Link>
-              <Link href="#" className="text-white/80 hover:text-white transition-colors">Отзывы</Link>
-              <Link href="#" className="text-white/80 hover:text-white transition-colors">Контакты</Link>
+              <Link href="#dom" className="text-white/80 hover:text-white transition-colors">Dom</Link>
+              <Link href="#udogodnienia" className="text-white/80 hover:text-white transition-colors">Udogodnienia</Link>
+              <Link href="#galeria" className="text-white/80 hover:text-white transition-colors">Galeria</Link>
+              <Link href="#lokalizacja" className="text-white/80 hover:text-white transition-colors">Lokalizacja</Link>
+              <Link href="#kontakt" className="text-white/80 hover:text-white transition-colors">Kontakt</Link>
             </div>
 
             {/* Right: Search */}
