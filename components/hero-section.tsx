@@ -32,7 +32,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight text-white/95 drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)] font-lexend uppercase"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)] font-lexend uppercase"
             >
               <span className="block">Highlander</span>
               <span className="block">House</span>
