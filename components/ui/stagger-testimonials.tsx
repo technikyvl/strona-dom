@@ -76,8 +76,7 @@ export const StaggerTestimonials: React.FC = () => {
           width: max-content;
           animation: marquee 120s linear infinite;
         }
-        /* Pause on hover */
-        .marquee-track:hover { animation-play-state: paused; }
+        /* No pause on hover */
       `}</style>
     </div>
   );
