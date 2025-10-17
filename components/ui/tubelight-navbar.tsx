@@ -20,6 +20,7 @@ interface NavBarProps {
 export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0]?.name ?? "")
   const [isMobile, setIsMobile] = useState(false)
+  const [compact, setCompact] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,6 +73,16 @@ export function NavBar({ items, className }: NavBarProps) {
     }
   }, [items])
 
+  // Compact mode on scroll (shrink and soften but keep visible)
+  useEffect(() => {
+    const onScroll = () => {
+      setCompact(window.scrollY > 80)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   // No auto-hide on scroll
 
   return (
@@ -85,12 +96,20 @@ export function NavBar({ items, className }: NavBarProps) {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 blur-2xl rounded-full"
-        style={{ background: "radial-gradient(40% 60% at 50% 50%, hsl(var(--primary)/.35), transparent)" }}
-        initial={{ opacity: 0.6 }}
-        animate={{ opacity: [0.6, 0.9, 0.6] }}
+        style={{ background: "radial-gradient(40% 60% at 50% 50%, hsl(var(--primary)/.45), transparent)" }}
+        initial={{ opacity: 0.5 }}
+        animate={{ opacity: compact ? 0.25 : [0.55, 0.9, 0.55] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="flex items-center gap-3 bg-white text-foreground border border-border py-2.5 px-3 rounded-full shadow-lg shadow-primary/20 ring-1 ring-primary/20 transition-all duration-300 font-lexend uppercase tracking-wide">
+      <div
+        className={cn(
+          "flex items-center gap-3 text-foreground border border-border rounded-full shadow-lg ring-1 transition-all duration-300 font-lexend uppercase tracking-wide backdrop-blur-sm",
+          compact
+            ? "bg-white/85 shadow-primary/10 ring-primary/10 py-1.5 px-2"
+            : "bg-white shadow-primary/20 ring-primary/20 py-2.5 px-3"
+        )}
+        style={{ opacity: compact ? 0.92 : 1 }}
+      >
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -112,14 +131,18 @@ export function NavBar({ items, className }: NavBarProps) {
               href={item.url}
               onClick={onClick}
               className={cn(
-                "relative cursor-pointer text-base font-semibold px-7 py-3 rounded-full transition-colors transition-transform duration-300",
+                "relative cursor-pointer font-semibold rounded-full transition-colors transition-transform duration-300",
                 "text-foreground/80 hover:text-foreground hover:scale-[1.03] active:scale-95",
                 isActive && "bg-primary/10 text-foreground",
               )}
+              style={{
+                padding: compact ? "0.5rem 0.9rem" : "0.75rem 1.75rem",
+                fontSize: compact ? "0.9rem" : "1rem",
+              }}
             >
               <span className="hidden md:inline">{item.name}</span>
               <span className="md:hidden">
-                <Icon size={22} strokeWidth={2.5} />
+                <Icon size={compact ? 18 : 22} strokeWidth={2.5} />
               </span>
               {isActive && (
                 <motion.div
@@ -132,10 +155,14 @@ export function NavBar({ items, className }: NavBarProps) {
                     damping: 30,
                   }}
                 >
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-primary rounded-t-full">
-                    <div className="absolute w-14 h-7 bg-primary/30 rounded-full blur-md -top-2 -left-2" />
-                    <div className="absolute w-10 h-7 bg-primary/30 rounded-full blur-md -top-1" />
-                    <div className="absolute w-5 h-5 bg-primary/30 rounded-full blur-sm top-0 left-2" />
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-primary rounded-t-full"
+                       style={{ width: compact ? "1.75rem" : "2.5rem", height: compact ? "0.2rem" : "0.25rem" }}>
+                    <div className="absolute rounded-full blur-md -top-2 -left-2"
+                         style={{ width: compact ? "2.5rem" : "3.5rem", height: compact ? "1.25rem" : "1.75rem", background: "rgb(var(--primary)/0.35)" }} />
+                    <div className="absolute rounded-full blur-md -top-1"
+                         style={{ width: compact ? "2rem" : "2.5rem", height: compact ? "1.25rem" : "1.75rem", background: "rgb(var(--primary)/0.35)" }} />
+                    <div className="absolute rounded-full blur-sm top-0 left-2"
+                         style={{ width: compact ? "1.1rem" : "1.25rem", height: compact ? "1.1rem" : "1.25rem", background: "rgb(var(--primary)/0.35)" }} />
                   </div>
                 </motion.div>
               )}
