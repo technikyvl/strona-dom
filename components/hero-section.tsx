@@ -32,7 +32,7 @@ export function HeroSection() {
         {/* Quick features removed */}
 
         {/* Bottom Cards */}
-        <div className="absolute bottom-12 left-6 right-6">
+        <div className="absolute left-6 right-6 bottom-36 sm:bottom-40 md:bottom-48 lg:bottom-56 xl:bottom-64 z-20">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
