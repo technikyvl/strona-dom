@@ -50,8 +50,8 @@ export const StaggerTestimonials: React.FC = () => {
   const { locale, t } = useI18n();
 
   return (
-    <div className="relative z-10 w-full h-screen overflow-hidden bg-transparent flex items-center">
-      <div className="relative w-full" style={{ height: laneHeight }}>
+    <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px]">
+      <div className="relative" style={{ height: laneHeight }}>
         <div className="container mx-auto px-6 mb-2">
           <span className="inline-block text-white/90 text-xs uppercase tracking-wider pl-1 pr-2 py-1 bg-black/20 backdrop-blur-sm rounded-md">
             {locale === 'pl' ? 'Opinie Google' :
