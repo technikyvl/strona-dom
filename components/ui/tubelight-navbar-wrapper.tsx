@@ -2,7 +2,7 @@
 
 import { Home, Map, Phone, Info } from "lucide-react"
 import { NavBar } from "@/components/ui/tubelight-navbar"
-import { I18nProvider, useI18n } from "@/components/ui/lang"
+import { useI18n } from "@/components/ui/lang"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 
 function InnerNav() {
@@ -23,12 +23,6 @@ function InnerNav() {
   )
 }
 
-export function NavBarClient() {
-  return (
-    <I18nProvider>
-      <InnerNav />
-    </I18nProvider>
-  )
-}
+export function NavBarClient() { return <InnerNav /> }
 
 
