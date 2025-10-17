@@ -6,19 +6,19 @@ import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const testimonials = [
-  { tempId: 0, testimonial: "Świetne miejsce, idealna lokalizacja i bardzo czysto.", by: "Kasia", rating: 5 },
-  { tempId: 1, testimonial: "Bardzo pomocny kontakt, wszystko zgodnie z opisem.", by: "Michał", rating: 5 },
-  { tempId: 2, testimonial: "Sauna i taras to ogromny plus. Polecam!", by: "Anna", rating: 5 },
-  { tempId: 3, testimonial: "Piękne widoki, blisko stoków. Na pewno wrócimy.", by: "Tomek", rating: 5 },
-  { tempId: 4, testimonial: "Dom przestronny i komfortowy, wszystko na plus.", by: "Ewa", rating: 5 },
-  { tempId: 5, testimonial: "Cicha okolica, super dla rodziny.", by: "Piotr", rating: 4 },
-  { tempId: 6, testimonial: "Wszystko zgodnie z opisem, polecam.", by: "Joanna", rating: 5 },
-  { tempId: 7, testimonial: "Świetny kontakt z właścicielem, szybka reakcja.", by: "Krzysztof", rating: 5 },
-  { tempId: 8, testimonial: "Bardzo wygodne łóżka i dobrze wyposażona kuchnia.", by: "Agnieszka", rating: 5 },
-  { tempId: 9, testimonial: "Idealne miejsce wypadowe na szlaki.", by: "Bartek", rating: 5 }
+  { tempId: 0, testimonialKey: "testimonial1", by: "Kasia", rating: 5 },
+  { tempId: 1, testimonialKey: "testimonial2", by: "Michał", rating: 5 },
+  { tempId: 2, testimonialKey: "testimonial3", by: "Anna", rating: 5 },
+  { tempId: 3, testimonialKey: "testimonial4", by: "Tomek", rating: 5 },
+  { tempId: 4, testimonialKey: "testimonial5", by: "Ewa", rating: 5 },
+  { tempId: 5, testimonialKey: "testimonial6", by: "Piotr", rating: 4 },
+  { tempId: 6, testimonialKey: "testimonial7", by: "Joanna", rating: 5 },
+  { tempId: 7, testimonialKey: "testimonial8", by: "Krzysztof", rating: 5 },
+  { tempId: 8, testimonialKey: "testimonial9", by: "Agnieszka", rating: 5 },
+  { tempId: 9, testimonialKey: "testimonial10", by: "Bartek", rating: 5 }
 ];
 
-function SmallCard({ t }: { t: typeof testimonials[number] }) {
+function SmallCard({ t, testimonialText }: { t: typeof testimonials[number], testimonialText: string }) {
   return (
     <div className={cn(
       "shrink-0 w-[280px] md:w-[340px] h-[90px] md:h-[110px]",
@@ -35,7 +35,7 @@ function SmallCard({ t }: { t: typeof testimonials[number] }) {
               ))}
             </div>
           </div>
-          <p className="mt-1 text-xs md:text-sm line-clamp-2 text-black/90">“{t.testimonial}”</p>
+          <p className="mt-1 text-xs md:text-sm line-clamp-2 text-black/90">"{testimonialText}"</p>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@ export const StaggerTestimonials: React.FC = () => {
   const laneHeight = 140;
   // Duplicate list for seamless loop
   const loop = [...testimonials, ...testimonials];
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
 
   return (
     <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px]">
@@ -65,7 +65,7 @@ export const StaggerTestimonials: React.FC = () => {
         <div className="absolute inset-0">
           <div className="marquee-track">
             {loop.map((t, i) => (
-              <SmallCard key={`${t.tempId}-${i}`} t={t} />
+              <SmallCard key={`${t.tempId}-${i}`} t={t} testimonialText={t(t.testimonialKey as any)} />
             ))}
           </div>
         </div>
