@@ -10,9 +10,10 @@ type UseInViewOptions = {
   delay?: number
 }
 
-export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, once = true }: UseInViewOptions = {}) {
+export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, once = true, delay = 0 }: UseInViewOptions = {}) {
   const ref = useRef<HTMLElement | null>(null)
   const [inView, setInView] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
 
   useEffect(() => {
     const element = ref.current
@@ -21,10 +22,18 @@ export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, o
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setInView(true)
+          if (entry.isIntersecting && !hasAnimated) {
+            if (delay > 0) {
+              setTimeout(() => {
+                setInView(true)
+                setHasAnimated(true)
+              }, delay)
+            } else {
+              setInView(true)
+              setHasAnimated(true)
+            }
             if (once) observer.unobserve(entry.target)
-          } else if (!once) {
+          } else if (!once && !entry.isIntersecting) {
             setInView(false)
           }
         })
@@ -34,7 +43,7 @@ export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, o
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [root, rootMargin, threshold, once])
+  }, [root, rootMargin, threshold, once, delay, hasAnimated])
 
   return { ref, inView }
 }
