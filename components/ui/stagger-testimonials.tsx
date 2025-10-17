@@ -1,69 +1,20 @@
 "use client"
 
 import React from 'react';
+import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const testimonials = [
-  {
-    tempId: 0,
-    testimonial: "My favorite solution in the market. We work 5x faster with COMPANY.",
-    by: "Alex, CEO at TechCorp",
-    imgSrc: "https://i.pravatar.cc/150?img=1"
-  },
-  {
-    tempId: 1,
-    testimonial: "I'm confident my data is safe with COMPANY. I can't say that about other providers.",
-    by: "Dan, CTO at SecureNet",
-    imgSrc: "https://i.pravatar.cc/150?img=2"
-  },
-  {
-    tempId: 2,
-    testimonial: "I know it's cliche, but we were lost before we found COMPANY. Can't thank you guys enough!",
-    by: "Stephanie, COO at InnovateCo",
-    imgSrc: "https://i.pravatar.cc/150?img=3"
-  },
-  {
-    tempId: 3,
-    testimonial: "COMPANY's products make planning for the future seamless. Can't recommend them enough!",
-    by: "Marie, CFO at FuturePlanning",
-    imgSrc: "https://i.pravatar.cc/150?img=4"
-  },
-  {
-    tempId: 4,
-    testimonial: "If I could give 11 stars, I'd give 12.",
-    by: "Andre, Head of Design at CreativeSolutions",
-    imgSrc: "https://i.pravatar.cc/150?img=5"
-  },
-  {
-    tempId: 5,
-    testimonial: "SO SO SO HAPPY WE FOUND YOU GUYS!!!! I'd bet you've saved me 100 hours so far.",
-    by: "Jeremy, Product Manager at TimeWise",
-    imgSrc: "https://i.pravatar.cc/150?img=6"
-  },
-  {
-    tempId: 6,
-    testimonial: "Took some convincing, but now that we're on COMPANY, we're never going back.",
-    by: "Pam, Marketing Director at BrandBuilders",
-    imgSrc: "https://i.pravatar.cc/150?img=7"
-  },
-  {
-    tempId: 7,
-    testimonial: "I would be lost without COMPANY's in-depth analytics. The ROI is EASILY 100X for us.",
-    by: "Daniel, Data Scientist at AnalyticsPro",
-    imgSrc: "https://i.pravatar.cc/150?img=8"
-  },
-  {
-    tempId: 8,
-    testimonial: "It's just the best. Period.",
-    by: "Fernando, UX Designer at UserFirst",
-    imgSrc: "https://i.pravatar.cc/150?img=9"
-  },
-  {
-    tempId: 9,
-    testimonial: "I switched 5 years ago and never looked back.",
-    by: "Andy, DevOps Engineer at CloudMasters",
-    imgSrc: "https://i.pravatar.cc/150?img=10"
-  },
+  { tempId: 0, testimonial: "Świetne miejsce, idealna lokalizacja i bardzo czysto.", by: "Kasia", rating: 5 },
+  { tempId: 1, testimonial: "Bardzo pomocny kontakt, wszystko zgodnie z opisem.", by: "Michał", rating: 5 },
+  { tempId: 2, testimonial: "Sauna i taras to ogromny plus. Polecam!", by: "Anna", rating: 5 },
+  { tempId: 3, testimonial: "Piękne widoki, blisko stoków. Na pewno wrócimy.", by: "Tomek", rating: 5 },
+  { tempId: 4, testimonial: "Dom przestronny i komfortowy, wszystko na plus.", by: "Ewa", rating: 5 },
+  { tempId: 5, testimonial: "Cicha okolica, super dla rodziny.", by: "Piotr", rating: 4 },
+  { tempId: 6, testimonial: "Wszystko zgodnie z opisem, polecam.", by: "Joanna", rating: 5 },
+  { tempId: 7, testimonial: "Świetny kontakt z właścicielem, szybka reakcja.", by: "Krzysztof", rating: 5 },
+  { tempId: 8, testimonial: "Bardzo wygodne łóżka i dobrze wyposażona kuchnia.", by: "Agnieszka", rating: 5 },
+  { tempId: 9, testimonial: "Idealne miejsce wypadowe na szlaki.", by: "Bartek", rating: 5 },
   {
     tempId: 10,
     testimonial: "I've been searching for a solution like COMPANY for YEARS. So glad I finally found one!",
