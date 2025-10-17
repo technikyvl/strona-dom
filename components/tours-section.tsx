@@ -7,26 +7,26 @@ import { useInView } from "@/lib/use-in-view"
 const features = [
   {
     id: 1,
-    title: "Sauna",
-    subtitle: "Duża sauna bez dodatkowych opłat",
+    titleKey: "sauna",
+    subtitleKey: "saunaDesc",
     image: "/sauna 1-kopia.jpeg",
   },
   {
     id: 2,
-    title: "Salon i kuchnia",
-    subtitle: "75'' TV, Netflix, w pełni wyposażona kuchnia",
+    titleKey: "salon",
+    subtitleKey: "salonDesc",
     image: "/salon 2-kopia.jpeg",
   },
   {
     id: 3,
-    title: "Taras i grill",
-    subtitle: "Przestronny taras z grillem gazowym",
+    titleKey: "terrace",
+    subtitleKey: "terraceDesc",
     image: "/plac zabaw-kopia.jpeg",
   },
   {
     id: 4,
-    title: "Narciarnia",
-    subtitle: "Przechowywanie sprzętu i suszarka do butów",
+    titleKey: "skiroom",
+    subtitleKey: "skiroomDesc",
     image: "/suszarnia-kopia.jpeg",
   },
 ]
@@ -39,7 +39,7 @@ export function ToursSection() {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <p className="text-foreground/60 text-sm uppercase tracking-widest mb-3">{t("amenities")}</p>
+          <p className="text-foreground/60 text-sm uppercase tracking-widest mb-3">{t("amenitiesSubtitle")}</p>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("amenities")}</h2>
         </div>
 
@@ -60,8 +60,8 @@ export function ToursSection() {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2">
-                  <h3 className="text-2xl font-bold text-white mb-2">{feature.title}</h3>
-                  <p className="text-white/70 text-sm">{feature.subtitle}</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{t(feature.titleKey as any)}</h3>
+                  <p className="text-white/70 text-sm">{t(feature.subtitleKey as any)}</p>
                 </div>
               </div>
             </Card>
