@@ -48,7 +48,7 @@ export const StaggerTestimonials: React.FC = () => {
   const loop = [...testimonials, ...testimonials];
 
   return (
-    <div className="relative w-full overflow-hidden bg-transparent mt-[-48px] md:mt-[-64px]">
+    <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-140px] md:mt-[-180px]">
       <div className="relative" style={{ height: laneHeight }}>
         <div className="absolute inset-0">
           <div className="marquee-track">
