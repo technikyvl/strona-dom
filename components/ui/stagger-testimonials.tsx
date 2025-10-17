@@ -64,8 +64,8 @@ export const StaggerTestimonials: React.FC = () => {
         </div>
         <div className="absolute inset-0">
           <div className="marquee-track">
-            {loop.map((t, i) => (
-              <SmallCard key={`${t.tempId}-${i}`} t={t} testimonialText={t(t.testimonialKey as any)} />
+            {loop.map((testimonial, i) => (
+              <SmallCard key={`${testimonial.tempId}-${i}`} t={testimonial} testimonialText={t(testimonial.testimonialKey as any)} />
             ))}
           </div>
         </div>
