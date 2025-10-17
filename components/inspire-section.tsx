@@ -23,12 +23,12 @@ export function InspireSection() {
       <div className={`relative h-full min-h-screen container mx-auto px-6 py-24 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
           {/* Left Content */}
-          <div className="flex-1 max-w-2xl">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight mb-8 font-serif-brand">{t("locationTitle")}</h2>
+          <div className={`flex-1 max-w-2xl transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight mb-8 font-serif-brand transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-6 scale-95"}`}>{t("locationTitle")}</h2>
 
             {/* Video Button */}
             <a href="#kontakt" className="inline-flex">
-            <button className="flex items-center gap-4 group transition-all duration-300 hover:scale-105">
+            <button className={`flex items-center gap-4 group transition-all duration-500 hover:scale-105 delay-500 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
               <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm border-2 border-primary flex items-center justify-center group-hover:bg-primary/40 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110">
                 <Play className="w-6 h-6 text-primary fill-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
@@ -37,7 +37,7 @@ export function InspireSection() {
             </a>
 
             {/* Bottom Text */}
-            <div className="mt-16">
+            <div className={`mt-16 transition-all duration-1000 ease-out delay-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
               <p className="text-foreground/70 text-sm leading-relaxed max-w-md whitespace-pre-line">
                 {t("locationDescription")}
               </p>
@@ -45,24 +45,24 @@ export function InspireSection() {
           </div>
 
           {/* Right Images */}
-          <div className="flex-1 flex items-center justify-center lg:justify-end">
+          <div className={`flex-1 flex items-center justify-center lg:justify-end transition-all duration-1000 ease-out delay-400 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <div className="relative w-full max-w-lg">
               {/* Image Stack */}
               <div className="relative">
                 <img
                   src="/salon 1-kopia.jpeg"
                   alt="Salon z częścią wypoczynkową"
-                  className="w-full h-auto rounded-lg shadow-2xl"
+                  className={`w-full h-auto rounded-lg shadow-2xl transition-all duration-1000 ease-out delay-500 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-6 scale-95"}`}
                 />
                 <img
                   src="/3 sypialnia 1-kopia.jpeg"
                   alt="Przytulna sypialnia"
-                  className="absolute -bottom-12 -left-12 w-2/3 h-auto rounded-lg shadow-2xl border-4 border-background"
+                  className={`absolute -bottom-12 -left-12 w-2/3 h-auto rounded-lg shadow-2xl border-4 border-background transition-all duration-1000 ease-out delay-700 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"}`}
                 />
                 <img
                   src="/sauna 2-kopia.jpeg"
                   alt="Sauna dla gości"
-                  className="absolute -top-12 -right-12 w-2/3 h-auto rounded-lg shadow-2xl border-4 border-background"
+                  className={`absolute -top-12 -right-12 w-2/3 h-auto rounded-lg shadow-2xl border-4 border-background transition-all duration-1000 ease-out delay-900 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"}`}
                 />
               </div>
             </div>
