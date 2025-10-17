@@ -21,20 +21,20 @@ function SmallCard({ t }: { t: typeof testimonials[number] }) {
   return (
     <div className={cn(
       "shrink-0 w-[280px] md:w-[340px] h-[90px] md:h-[110px]",
-      "rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl text-white",
-      "ring-1 ring-white/10 shadow-lg shadow-black/10 px-4 py-3 mr-3 md:mr-4"
+      "rounded-2xl border border-black/10 bg-white/80 backdrop-blur-xl text-black",
+      "ring-1 ring-black/5 shadow-lg shadow-black/10 px-4 py-3 mr-3 md:mr-4"
     )}>
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <p className="text-sm md:text-base font-medium text-white/95">{t.by}</p>
+            <p className="text-sm md:text-base font-medium text-black/90">{t.by}</p>
             <div className="flex items-center gap-0.5 text-yellow-400">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className={cn("h-3.5 w-3.5", i < (t.rating ?? 5) ? "fill-yellow-400" : "fill-transparent text-white/40")} />
+                <Star key={i} className={cn("h-3.5 w-3.5", i < (t.rating ?? 5) ? "fill-yellow-400" : "fill-transparent text-black/30")} />
               ))}
             </div>
           </div>
-          <p className="mt-1 text-xs md:text-sm line-clamp-2 text-white/90">“{t.testimonial}”</p>
+          <p className="mt-1 text-xs md:text-sm line-clamp-2 text-black/90">“{t.testimonial}”</p>
         </div>
       </div>
     </div>
