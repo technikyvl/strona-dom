@@ -27,7 +27,7 @@ export function HeroSection() {
       {/* Content */}
       <div className={`relative h-full container mx-auto px-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="flex items-center h-full justify-end">
-          <div className="max-w-2xl text-left pr-4 md:pr-8 lg:pr-12 -translate-y-16 md:-translate-y-20 lg:-translate-y-24">
+          <div className="max-w-2xl text-left pr-2 md:pr-4 lg:pr-6 -translate-y-16 md:-translate-y-20 lg:-translate-y-24 translate-x-2 md:translate-x-3 lg:translate-x-4">
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
