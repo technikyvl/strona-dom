@@ -109,10 +109,10 @@ export function NavBar({ items, className }: NavBarProps) {
           "backdrop-blur-xl supports-[backdrop-filter]:bg-white/40 bg-white/60",
         )}
         animate={{
-          paddingLeft: compact ? 8 : 12,
-          paddingRight: compact ? 8 : 12,
-          paddingTop: compact ? 6 : 10,
-          paddingBottom: compact ? 6 : 10,
+          paddingLeft: compact ? 8 : 10,
+          paddingRight: compact ? 8 : 10,
+          paddingTop: compact ? 6 : 8,
+          paddingBottom: compact ? 6 : 8,
           boxShadow: compact ? "0 10px 25px rgba(255,165,0,0.12)" : "0 15px 35px rgba(255,165,0,0.18)",
           opacity: compact ? 0.95 : 1,
           borderColor: compact ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.5)",
@@ -145,8 +145,8 @@ export function NavBar({ items, className }: NavBarProps) {
                 isActive && "bg-primary/15 text-foreground",
               )}
               style={{
-                padding: compact ? "0.5rem 0.9rem" : "0.75rem 1.75rem",
-                fontSize: compact ? "0.9rem" : "1rem",
+                padding: compact ? "0.5rem 0.9rem" : "0.65rem 1.5rem",
+                fontSize: compact ? "0.9rem" : "0.95rem",
               }}
             >
               <span className="hidden md:inline">{item.name}</span>
