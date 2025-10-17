@@ -4,7 +4,7 @@ import { InspireSection } from "@/components/inspire-section"
 import { ContactSection } from "@/components/contact-section"
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials"
 import { NavBar } from "@/components/ui/tubelight-navbar"
-import { Home, Images, MapPin, Phone, Sparkles } from "lucide-react"
+import { Home, Star, Map, Phone } from "lucide-react"
 
 export default function Home() {
   return (
@@ -12,14 +12,16 @@ export default function Home() {
       <NavBar
         items={[
           { name: "Dom", url: "#dom", icon: Home },
-          { name: "Opinie", url: "#opinie", icon: Sparkles },
-          { name: "Udogodnienia", url: "#udogodnienia", icon: Images },
-          { name: "Lokalizacja", url: "#lokalizacja", icon: MapPin },
+          { name: "Opinie", url: "#opinie", icon: Star },
+          { name: "Udogodnienia", url: "#udogodnienia", icon: Star },
+          { name: "Lokalizacja", url: "#lokalizacja", icon: Map },
           { name: "Kontakt", url: "#kontakt", icon: Phone },
         ]}
       />
       <HeroSection />
-      <StaggerTestimonials />
+      <section id="opinie">
+        <StaggerTestimonials />
+      </section>
       <ToursSection />
       <InspireSection />
       <ContactSection />
