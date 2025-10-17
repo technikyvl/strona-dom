@@ -42,14 +42,17 @@ function SmallCard({ t }: { t: typeof testimonials[number] }) {
 }
 
 export const StaggerTestimonials: React.FC = () => {
-  // Narrower lane: ~220px tall
-  const laneHeight = 220;
+  // Narrower lane
+  const laneHeight = 140;
   // Duplicate list for seamless loop
   const loop = [...testimonials, ...testimonials];
 
   return (
-    <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-140px] md:mt-[-180px]">
+    <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px]">
       <div className="relative" style={{ height: laneHeight }}>
+        <div className="container mx-auto px-6 mb-3">
+          <span className="text-white/90 text-xs uppercase tracking-wider">Opinie Google</span>
+        </div>
         <div className="absolute inset-0">
           <div className="marquee-track">
             {loop.map((t, i) => (
