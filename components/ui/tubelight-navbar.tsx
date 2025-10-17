@@ -74,9 +74,11 @@ export function NavBar({ items, className }: NavBarProps) {
   }, [items])
 
   // Compact mode on scroll (shrink and soften but keep visible)
+  // Compact mode with hysteresis to avoid jitter
   useEffect(() => {
     const onScroll = () => {
-      setCompact(window.scrollY > 80)
+      const y = window.scrollY
+      setCompact(prev => (prev ? y > 60 : y > 120))
     }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -97,18 +99,25 @@ export function NavBar({ items, className }: NavBarProps) {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 blur-2xl rounded-full"
         style={{ background: "radial-gradient(40% 60% at 50% 50%, hsl(var(--primary)/.45), transparent)" }}
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: compact ? 0.25 : [0.55, 0.9, 0.55] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        initial={{ opacity: 0.45 }}
+        animate={{ opacity: compact ? 0.22 : [0.5, 0.85, 0.5] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div
+      <motion.div
         className={cn(
-          "flex items-center gap-3 text-foreground border border-border rounded-full shadow-lg ring-1 transition-all duration-300 font-lexend uppercase tracking-wide backdrop-blur-sm",
-          compact
-            ? "bg-white/85 shadow-primary/10 ring-primary/10 py-1.5 px-2"
-            : "bg-white shadow-primary/20 ring-primary/20 py-2.5 px-3"
+          "flex items-center gap-3 text-foreground border border-border rounded-full shadow-lg ring-1 font-lexend uppercase tracking-wide",
+          "backdrop-blur-xl supports-[backdrop-filter]:bg-white/40 bg-white/60",
         )}
-        style={{ opacity: compact ? 0.92 : 1 }}
+        animate={{
+          paddingLeft: compact ? 8 : 12,
+          paddingRight: compact ? 8 : 12,
+          paddingTop: compact ? 6 : 10,
+          paddingBottom: compact ? 6 : 10,
+          boxShadow: compact ? "0 10px 25px rgba(255,165,0,0.12)" : "0 15px 35px rgba(255,165,0,0.18)",
+          opacity: compact ? 0.95 : 1,
+          borderColor: compact ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.5)",
+        }}
+        transition={{ type: "spring", stiffness: 260, damping: 30 }}
       >
         {items.map((item) => {
           const Icon = item.icon
@@ -133,7 +142,7 @@ export function NavBar({ items, className }: NavBarProps) {
               className={cn(
                 "relative cursor-pointer font-semibold rounded-full transition-colors transition-transform duration-300",
                 "text-foreground/80 hover:text-foreground hover:scale-[1.03] active:scale-95",
-                isActive && "bg-primary/10 text-foreground",
+                isActive && "bg-primary/15 text-foreground",
               )}
               style={{
                 padding: compact ? "0.5rem 0.9rem" : "0.75rem 1.75rem",
@@ -169,7 +178,7 @@ export function NavBar({ items, className }: NavBarProps) {
             </Link>
           )
         })}
-      </div>
+      </motion.div>
     </div>
   )
 }
