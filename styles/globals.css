@@ -133,4 +133,7 @@
   .font-serif-brand {
     font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   }
+  .font-lexend {
+    font-family: var(--font-lexend), 'Helvetica Neue', Arial, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Liberation Sans', sans-serif;
+  }
 }
