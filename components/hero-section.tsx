@@ -31,43 +31,7 @@ export function HeroSection() {
 
         {/* Quick features removed */}
 
-        {/* Bottom Cards */}
-        <div className="absolute left-6 right-6 bottom-36 sm:bottom-40 md:bottom-48 lg:bottom-56 xl:bottom-64 z-20">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  text:
-                    "Sauna, salon z 75'' TV i Netflix, w pełni wyposażona kuchnia oraz duży taras z widokiem.",
-                  cta: "Sprawdź udogodnienia",
-                  href: "#udogodnienia",
-                },
-                {
-                  text:
-                    "W cenie: Wi‑Fi, narciarnia z suszarką do butów, parking na 5 samochodów.",
-                  cta: "Sprawdź udogodnienia",
-                  href: "#udogodnienia",
-                },
-                {
-                  text:
-                    "Lokalizacja: centrum Szczyrku, blisko stoków (Skrzyczne 850 m, SMR 2,8 km).",
-                  cta: "Pokaż lokalizację",
-                  href: "#lokalizacja",
-                },
-              ].map((card, i) => (
-                <div key={i} className="bg-black/40 backdrop-blur-sm p-6 border-t border-white/20">
-                  <p className="text-white/80 text-sm mb-4 leading-relaxed">{card.text}</p>
-                  <a href={card.href} className="inline-flex">
-                    <button className="flex items-center gap-2 text-white text-sm font-medium uppercase tracking-wider hover:text-primary transition-all duration-300 hover:gap-3 group rounded-full px-4 py-2 bg-white/10 hover:bg-white/15 ring-1 ring-inset ring-white/20">
-                      {card.cta}
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Bottom Cards removed */}
       </div>
     </section>
   )
