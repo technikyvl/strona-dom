@@ -31,6 +31,47 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Sync active tab with hash on load and section in-view while scrolling
+  useEffect(() => {
+    // initial from hash
+    const hash = typeof window !== 'undefined' ? window.location.hash : ''
+    if (hash) {
+      const found = items.find(i => i.url === hash)
+      if (found) setActiveTab(found.name)
+    }
+
+    const sectionIds = items
+      .map(i => (i.url.startsWith('#') ? i.url.slice(1) : ''))
+      .filter(Boolean)
+
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter((el): el is Element => Boolean(el))
+
+    if (sections.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let best: IntersectionObserverEntry | null = null
+        for (const e of entries) {
+          if (!best || e.intersectionRatio > best.intersectionRatio) best = e
+        }
+        if (best && best.isIntersecting) {
+          const id = (best.target as HTMLElement).id
+          const match = items.find(i => i.url === `#${id}`)
+          if (match) setActiveTab(match.name)
+        }
+      },
+      { threshold: [0.6], rootMargin: '0px 0px -30% 0px' }
+    )
+
+    sections.forEach(s => observer.observe(s))
+    return () => {
+      sections.forEach(s => observer.unobserve(s))
+      observer.disconnect()
+    }
+  }, [items])
+
   // No auto-hide on scroll
 
   return (
@@ -49,7 +90,7 @@ export function NavBar({ items, className }: NavBarProps) {
         animate={{ opacity: [0.6, 0.9, 0.6] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="flex items-center gap-3 bg-white text-foreground border border-border py-2.5 px-3 rounded-full shadow-lg shadow-primary/20 ring-1 ring-primary/20 transition-all duration-300">
+      <div className="flex items-center gap-3 bg-white text-foreground border border-border py-2.5 px-3 rounded-full shadow-lg shadow-primary/20 ring-1 ring-primary/20 transition-all duration-300 font-lexend uppercase tracking-wide">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
