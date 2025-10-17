@@ -7,6 +7,7 @@ type UseInViewOptions = {
   rootMargin?: string
   threshold?: number | number[]
   once?: boolean
+  delay?: number
 }
 
 export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, once = true }: UseInViewOptions = {}) {
