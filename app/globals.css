@@ -130,3 +130,9 @@
     background-attachment: fixed;
   }
 }
+
+@layer utilities {
+  .font-lexend {
+    font-family: var(--font-lexend), 'Helvetica Neue', Helvetica, Arial, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Liberation Sans', sans-serif;
+  }
+}
