@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { MouseEvent, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { LucideIcon } from "lucide-react"
@@ -40,22 +40,40 @@ export function NavBar({ items, className }: NavBarProps) {
         className,
       )}
     >
-      {/* outer glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10 blur-2xl rounded-full bg-foreground/10" />
-      <div className="flex items-center gap-3 bg-white text-foreground border border-border py-2 px-2 rounded-full shadow-lg shadow-foreground/10 ring-1 ring-foreground/10">
+      {/* outer glow (orange, animated) */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 blur-2xl rounded-full"
+        style={{ background: "radial-gradient(40% 60% at 50% 50%, hsl(var(--primary)/.35), transparent)" }}
+        initial={{ opacity: 0.6 }}
+        animate={{ opacity: [0.6, 0.9, 0.6] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div className="flex items-center gap-3 bg-white text-foreground border border-border py-2.5 px-3 rounded-full shadow-lg shadow-primary/20 ring-1 ring-primary/20 transition-all duration-300">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
+          const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+            if (item.url.startsWith("#")) {
+              e.preventDefault()
+              const el = document.querySelector(item.url)
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" })
+                history.pushState(null, "", item.url)
+              }
+            }
+            setActiveTab(item.name)
+          }
 
           return (
             <Link
               key={item.name}
               href={item.url}
-              onClick={() => setActiveTab(item.name)}
+              onClick={onClick}
               className={cn(
-                "relative cursor-pointer text-base font-semibold px-7 py-3 rounded-full transition-colors",
-                "text-foreground/80 hover:text-foreground",
-                isActive && "bg-foreground/10 text-foreground",
+                "relative cursor-pointer text-base font-semibold px-7 py-3 rounded-full transition-colors transition-transform duration-300",
+                "text-foreground/80 hover:text-foreground hover:scale-[1.03] active:scale-95",
+                isActive && "bg-primary/10 text-foreground",
               )}
             >
               <span className="hidden md:inline">{item.name}</span>
@@ -65,7 +83,7 @@ export function NavBar({ items, className }: NavBarProps) {
               {isActive && (
                 <motion.div
                   layoutId="lamp"
-                  className="absolute inset-0 w-full bg-foreground/5 rounded-full -z-10"
+                  className="absolute inset-0 w-full bg-primary/10 rounded-full -z-10"
                   initial={false}
                   transition={{
                     type: "spring",
@@ -73,10 +91,10 @@ export function NavBar({ items, className }: NavBarProps) {
                     damping: 30,
                   }}
                 >
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-foreground rounded-t-full">
-                    <div className="absolute w-14 h-7 bg-foreground/20 rounded-full blur-md -top-2 -left-2" />
-                    <div className="absolute w-10 h-7 bg-foreground/20 rounded-full blur-md -top-1" />
-                    <div className="absolute w-5 h-5 bg-foreground/20 rounded-full blur-sm top-0 left-2" />
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-primary rounded-t-full">
+                    <div className="absolute w-14 h-7 bg-primary/30 rounded-full blur-md -top-2 -left-2" />
+                    <div className="absolute w-10 h-7 bg-primary/30 rounded-full blur-md -top-1" />
+                    <div className="absolute w-5 h-5 bg-primary/30 rounded-full blur-sm top-0 left-2" />
                   </div>
                 </motion.div>
               )}
