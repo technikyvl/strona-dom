@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
+import { motion } from "framer-motion"
 import { useState } from "react"
 import { useInView } from "@/lib/use-in-view"
 
@@ -26,7 +27,16 @@ export function HeroSection() {
       {/* Content */}
       <div className={`relative h-full container mx-auto px-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="flex items-center h-full">
-          <div className="max-w-2xl" />
+          <div className="max-w-2xl">
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white/95 drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]"
+            >
+              highlander dom szczyrk
+            </motion.h1>
+          </div>
         </div>
 
         {/* Quick features removed */}

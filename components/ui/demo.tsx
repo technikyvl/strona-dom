@@ -1,3 +1,4 @@
+import { HeroGeometric } from "@/components/ui/shape-landing-hero"
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 
 const DemoOne = () => {
@@ -9,5 +10,13 @@ const DemoOne = () => {
 };
 
 export { DemoOne };
+
+function DemoHeroGeometric() {
+  return (
+    <HeroGeometric badge="Kokonut UI" title1="Elevate Your" title2="Digital Vision" />
+  )
+}
+
+export { DemoHeroGeometric }
 
 
