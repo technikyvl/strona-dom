@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react';
+import { useI18n } from '@/components/ui/lang';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -46,12 +47,20 @@ export const StaggerTestimonials: React.FC = () => {
   const laneHeight = 140;
   // Duplicate list for seamless loop
   const loop = [...testimonials, ...testimonials];
+  const { locale } = useI18n();
 
   return (
     <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px]">
       <div className="relative" style={{ height: laneHeight }}>
         <div className="container mx-auto px-6 mb-2">
-          <span className="inline-block text-white/90 text-xs uppercase tracking-wider pl-1 pr-2 py-1 bg-black/20 backdrop-blur-sm rounded-md">Opinie Google</span>
+          <span className="inline-block text-white/90 text-xs uppercase tracking-wider pl-1 pr-2 py-1 bg-black/20 backdrop-blur-sm rounded-md">
+            {locale === 'pl' && 'Opinie Google'}
+            {locale === 'en' && 'Google Reviews'}
+            {locale === 'de' && 'Google Bewertungen'}
+            {locale === 'cs' && 'Google Recenze'}
+            {locale === 'sk' && 'Google Recenzie'}
+            {locale === 'uk' && 'Відгуки Google'}
+          </span>
         </div>
         <div className="absolute inset-0">
           <div className="marquee-track">
