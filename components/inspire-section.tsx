@@ -6,7 +6,7 @@ import { useInView } from "@/lib/use-in-view"
 export function InspireSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: false })
   return (
-    <section id="lokalizacja" ref={ref as any} className="relative min-h-screen w-full overflow-hidden">
+    <section id="lokalizacja" ref={ref as any} className="relative min-h-screen w-full overflow-hidden bg-white">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -14,7 +14,7 @@ export function InspireSection() {
           alt="Dom i otoczenie w Szczyrku"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent" />
       </div>
 
       {/* Content */}
@@ -22,7 +22,7 @@ export function InspireSection() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
           {/* Left Content */}
           <div className="flex-1 max-w-2xl">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-8 font-serif-brand">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight mb-8 font-serif-brand">
               Szczyrk – blisko stoków i szlaków
             </h2>
 
@@ -32,7 +32,7 @@ export function InspireSection() {
               <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm border-2 border-primary flex items-center justify-center group-hover:bg-primary/40 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110">
                 <Play className="w-6 h-6 text-primary fill-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <span className="text-white text-sm uppercase tracking-wider font-medium group-hover:text-primary transition-colors duration-300">
+              <span className="text-foreground text-sm uppercase tracking-wider font-medium group-hover:text-primary transition-colors duration-300">
                 Zapytaj o dostępność
               </span>
             </button>
@@ -40,7 +40,7 @@ export function InspireSection() {
 
             {/* Bottom Text */}
             <div className="mt-16">
-              <p className="text-white/70 text-sm leading-relaxed max-w-md">
+              <p className="text-foreground/70 text-sm leading-relaxed max-w-md">
                 Centrum Szczyrku, spokojna okolica, blisko restauracji i sklepów.
                 Skrzyczne 850 m, SMR 2,8 km, Beskid Sport Arena 2,2 km, SKIBUS 200 m.
               </p>
