@@ -1,10 +1,12 @@
 "use client"
 
 import { Play } from "lucide-react"
+import { useI18n } from "@/components/ui/lang"
 import { useInView } from "@/lib/use-in-view"
 
 export function InspireSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: false })
+  const { t } = useI18n()
   return (
     <section id="lokalizacja" ref={ref as any} className="relative min-h-screen w-full overflow-hidden bg-white">
       {/* Background Image */}
@@ -22,9 +24,7 @@ export function InspireSection() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
           {/* Left Content */}
           <div className="flex-1 max-w-2xl">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight mb-8 font-serif-brand">
-              Szczyrk – blisko stoków i szlaków
-            </h2>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight mb-8 font-serif-brand">{t("location")}</h2>
 
             {/* Video Button */}
             <a href="#kontakt" className="inline-flex">
@@ -32,9 +32,7 @@ export function InspireSection() {
               <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm border-2 border-primary flex items-center justify-center group-hover:bg-primary/40 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110">
                 <Play className="w-6 h-6 text-primary fill-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <span className="text-foreground text-sm uppercase tracking-wider font-medium group-hover:text-primary transition-colors duration-300">
-                Zapytaj o dostępność
-              </span>
+              <span className="text-foreground text-sm uppercase tracking-wider font-medium group-hover:text-primary transition-colors duration-300">{t("contact")}</span>
             </button>
             </a>
 
