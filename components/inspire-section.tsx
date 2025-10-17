@@ -8,7 +8,7 @@ export function InspireSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: false })
   const { t } = useI18n()
   return (
-    <section id="lokalizacja" ref={ref as any} className="relative min-h-screen w-full overflow-hidden bg-white">
+    <section id="lokalizacja" ref={ref as any} className="relative h-screen w-full overflow-hidden bg-white">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img

@@ -7,7 +7,7 @@ export function ContactSection() {
   const { ref, inView } = useInView({ threshold: 0.1, once: false })
   const { t } = useI18n()
   return (
-    <section id="kontakt" ref={ref as any} className="py-24 bg-white">
+    <section id="kontakt" ref={ref as any} className="h-screen bg-white flex items-center">
       <div className="container mx-auto px-6">
         <div className={`text-center mb-10 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
