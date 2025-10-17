@@ -1,6 +1,7 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
+import { useI18n } from "@/components/ui/lang"
 import { useInView } from "@/lib/use-in-view"
 
 const features = [
@@ -32,13 +33,14 @@ const features = [
 
 export function ToursSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: false })
+  const { t } = useI18n()
   return (
     <section id="udogodnienia" ref={ref as any} className="py-24 bg-white">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <p className="text-foreground/60 text-sm uppercase tracking-widest mb-3">Wszystko, czego potrzebujesz na wyjazd</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif-brand">Udogodnienia</h2>
+          <p className="text-foreground/60 text-sm uppercase tracking-widest mb-3">{t("amenities")}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("amenities")}</h2>
         </div>
 
         {/* Tours Grid */}
