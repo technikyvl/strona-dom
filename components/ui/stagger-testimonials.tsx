@@ -48,7 +48,7 @@ export const StaggerTestimonials: React.FC = () => {
   const loop = [...testimonials, ...testimonials];
 
   return (
-    <div className="relative w-full overflow-hidden bg-muted/20 border-y border-border">
+    <div className="relative w-full overflow-hidden bg-transparent mt-[-48px] md:mt-[-64px]">
       <div className="relative" style={{ height: laneHeight }}>
         <div className="absolute inset-0">
           <div className="marquee-track">
@@ -59,9 +59,7 @@ export const StaggerTestimonials: React.FC = () => {
         </div>
       </div>
 
-      {/* Gradient edges for nicer fade */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
+      {/* Edge fades removed to keep full transparency over hero */}
 
       <style jsx>{`
         @keyframes marquee {
@@ -73,7 +71,7 @@ export const StaggerTestimonials: React.FC = () => {
           align-items: center;
           height: 100%;
           width: max-content;
-          animation: marquee 40s linear infinite;
+          animation: marquee 120s linear infinite;
         }
         /* Pause on hover */
         .marquee-track:hover { animation-play-state: paused; }
