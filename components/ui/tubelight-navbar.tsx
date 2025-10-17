@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { LucideIcon } from "lucide-react"
@@ -20,6 +20,8 @@ interface NavBarProps {
 export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0]?.name ?? "")
   const [isMobile, setIsMobile] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const lastScroll = useRef(0)
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,8 +33,21 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY
+      const goingDown = y > lastScroll.current
+      setHidden(goingDown && y > 80) // hide after slight scroll
+      lastScroll.current = y
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
-    <div
+    <motion.div
+      animate={{ y: hidden ? (isMobile ? 96 : -96) : 0, opacity: hidden ? 0.9 : 1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 30 }}
       className={cn(
         "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
         className,
@@ -50,8 +65,8 @@ export function NavBar({ items, className }: NavBarProps) {
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
-                "text-foreground/80 hover:text-primary",
-                isActive && "bg-muted text-primary",
+                "text-foreground/80 hover:text-foreground",
+                isActive && "bg-foreground/10 text-foreground",
               )}
             >
               <span className="hidden md:inline">{item.name}</span>
@@ -61,7 +76,7 @@ export function NavBar({ items, className }: NavBarProps) {
               {isActive && (
                 <motion.div
                   layoutId="lamp"
-                  className="absolute inset-0 w-full bg-primary/5 rounded-full -z-10"
+                  className="absolute inset-0 w-full bg-foreground/5 rounded-full -z-10"
                   initial={false}
                   transition={{
                     type: "spring",
@@ -69,10 +84,10 @@ export function NavBar({ items, className }: NavBarProps) {
                     damping: 30,
                   }}
                 >
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-t-full">
-                    <div className="absolute w-12 h-6 bg-primary/20 rounded-full blur-md -top-2 -left-2" />
-                    <div className="absolute w-8 h-6 bg-primary/20 rounded-full blur-md -top-1" />
-                    <div className="absolute w-4 h-4 bg-primary/20 rounded-full blur-sm top-0 left-2" />
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-foreground rounded-t-full">
+                    <div className="absolute w-12 h-6 bg-foreground/20 rounded-full blur-md -top-2 -left-2" />
+                    <div className="absolute w-8 h-6 bg-foreground/20 rounded-full blur-md -top-1" />
+                    <div className="absolute w-4 h-4 bg-foreground/20 rounded-full blur-sm top-0 left-2" />
                   </div>
                 </motion.div>
               )}
@@ -80,7 +95,7 @@ export function NavBar({ items, className }: NavBarProps) {
           )
         })}
       </div>
-    </div>
+    </motion.div>
   )
 }
 
