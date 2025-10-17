@@ -20,8 +20,8 @@ export function HeroSection() {
           alt="Dom z zewnątrz – Highlander House Szczyrk"
           className="w-full h-full object-cover"
         />
-        {/* smoother, longer bottom gradient into next section */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
+        {/* smoother, light fade into white sections */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
       </div>
 
       {/* Content */}
