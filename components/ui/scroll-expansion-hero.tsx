@@ -39,6 +39,7 @@ const ScrollExpandMedia = ({
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState<boolean>(false);
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
+  const [isComponentInView, setIsComponentInView] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -50,6 +51,9 @@ const ScrollExpandMedia = ({
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      // Only handle scroll if the component is in view
+      if (!isComponentInView) return; // Allow normal scrolling if not in view
+      
       e.preventDefault();
       
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
@@ -79,6 +83,9 @@ const ScrollExpandMedia = ({
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!touchStartY) return;
+
+      // Only handle touch if the component is in view
+      if (!isComponentInView) return; // Allow normal scrolling if not in view
 
       e.preventDefault();
       const touchY = e.touches[0].clientY;
@@ -114,7 +121,8 @@ const ScrollExpandMedia = ({
     };
 
     const handleScroll = (): void => {
-      if (!mediaFullyExpanded) {
+      // Only prevent scrolling if the component is in view and not fully expanded
+      if (isComponentInView && !mediaFullyExpanded) {
         window.scrollTo(0, 0);
       }
     };
@@ -181,7 +189,7 @@ const ScrollExpandMedia = ({
       );
       window.removeEventListener('touchend', handleTouchEnd as EventListener);
     };
-  }, [scrollProgress, mediaFullyExpanded, touchStartY]);
+  }, [scrollProgress, mediaFullyExpanded, touchStartY, isComponentInView]);
 
   useEffect(() => {
     const checkIfMobile = (): void => {
@@ -192,6 +200,28 @@ const ScrollExpandMedia = ({
     window.addEventListener('resize', checkIfMobile);
 
     return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Intersection Observer to track when component is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsComponentInView(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
   const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
