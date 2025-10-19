@@ -55,6 +55,9 @@ const ScrollExpandMedia = ({
       // Only handle scroll if the component is in view
       if (!isComponentInView) return; // Allow normal scrolling if not in view
       
+      // Don't interfere with scrolling for the first 500ms after entering
+      if (hasJustEntered) return;
+      
       // Only prevent default if we're actually going to handle the scroll
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
         e.preventDefault();
@@ -191,7 +194,7 @@ const ScrollExpandMedia = ({
       );
       window.removeEventListener('touchend', handleTouchEnd as EventListener);
     };
-  }, [scrollProgress, mediaFullyExpanded, touchStartY, isComponentInView]);
+  }, [scrollProgress, mediaFullyExpanded, touchStartY, isComponentInView, hasJustEntered]);
 
   useEffect(() => {
     const checkIfMobile = (): void => {
