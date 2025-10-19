@@ -10,8 +10,8 @@ function InnerNav() {
   const items = [
     { name: t("home"), url: "#dom", icon: Home },
     { name: t("amenities"), url: "#udogodnienia", icon: Info },
-    { name: t("location"), url: "#lokalizacja", icon: Map },
     { name: t("contact"), url: "#kontakt", icon: Phone },
+    { name: t("location"), url: "#lokalizacja", icon: Map },
   ]
   return (
     <>

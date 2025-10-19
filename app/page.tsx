@@ -16,10 +16,10 @@ export default function Home() {
           <StaggerTestimonials />
         </section>
         <ToursSection />
-        <LocationScrollSection />
         <div className="transition-opacity duration-1000 ease-in-out">
           <ContactSection />
         </div>
+        <LocationScrollSection />
       </I18nRoot>
     </main>
   )
