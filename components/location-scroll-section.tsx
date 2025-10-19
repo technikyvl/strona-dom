@@ -8,8 +8,7 @@ export function LocationScrollSection() {
   const { t } = useI18n();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
+    // Don't scroll to top immediately - let the component handle it
     const resetEvent = new Event('resetSection');
     window.dispatchEvent(resetEvent);
   }, []);

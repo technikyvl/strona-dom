@@ -17,7 +17,9 @@ export default function Home() {
         </section>
         <ToursSection />
         <LocationScrollSection />
-        <ContactSection />
+        <div className="transition-opacity duration-1000 ease-in-out">
+          <ContactSection />
+        </div>
       </I18nRoot>
     </main>
   )

@@ -41,6 +41,7 @@ const ScrollExpandMedia = ({
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
   const [isComponentInView, setIsComponentInView] = useState<boolean>(false);
   const [hasJustEntered, setHasJustEntered] = useState<boolean>(false);
+  const [isAnimationComplete, setIsAnimationComplete] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -64,10 +65,11 @@ const ScrollExpandMedia = ({
         setMediaFullyExpanded(false);
         setScrollProgress(0);
         setShowContent(false);
+        setIsAnimationComplete(false);
       } else if (!mediaFullyExpanded && e.deltaY > 0) {
         // Only prevent default when scrolling down to expand
         e.preventDefault();
-        const scrollDelta = e.deltaY * 0.002; // Increased sensitivity
+        const scrollDelta = e.deltaY * 0.0015; // Smoother sensitivity
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
           1
@@ -77,8 +79,11 @@ const ScrollExpandMedia = ({
         if (newProgress >= 1) {
           setMediaFullyExpanded(true);
           setShowContent(true);
-        } else if (newProgress < 0.75) {
+          // Mark animation as complete after a short delay for smooth transition
+          setTimeout(() => setIsAnimationComplete(true), 300);
+        } else if (newProgress < 0.8) {
           setShowContent(false);
+          setIsAnimationComplete(false);
         }
       }
       // If scrolling up and not fully expanded, allow normal scroll
@@ -102,9 +107,10 @@ const ScrollExpandMedia = ({
         setMediaFullyExpanded(false);
         setScrollProgress(0);
         setShowContent(false);
+        setIsAnimationComplete(false);
       } else if (!mediaFullyExpanded) {
-        // Increase sensitivity for mobile
-        const scrollFactor = deltaY < 0 ? 0.01 : 0.008;
+        // Smoother sensitivity for mobile
+        const scrollFactor = deltaY < 0 ? 0.008 : 0.006;
         const scrollDelta = deltaY * scrollFactor;
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
@@ -115,8 +121,11 @@ const ScrollExpandMedia = ({
         if (newProgress >= 1) {
           setMediaFullyExpanded(true);
           setShowContent(true);
-        } else if (newProgress < 0.75) {
+          // Mark animation as complete after a short delay for smooth transition
+          setTimeout(() => setIsAnimationComplete(true), 300);
+        } else if (newProgress < 0.8) {
           setShowContent(false);
+          setIsAnimationComplete(false);
         }
 
         setTouchStartY(touchY);
@@ -146,8 +155,11 @@ const ScrollExpandMedia = ({
           if (newProgress >= 1) {
             setMediaFullyExpanded(true);
             setShowContent(true);
-          } else if (newProgress < 0.75) {
+            // Mark animation as complete after a short delay for smooth transition
+            setTimeout(() => setIsAnimationComplete(true), 300);
+          } else if (newProgress < 0.8) {
             setShowContent(false);
+            setIsAnimationComplete(false);
           }
         }
       } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
@@ -156,6 +168,7 @@ const ScrollExpandMedia = ({
           setMediaFullyExpanded(false);
           setScrollProgress(0);
           setShowContent(false);
+          setIsAnimationComplete(false);
         }
       }
     };
@@ -236,9 +249,13 @@ const ScrollExpandMedia = ({
     };
   }, []);
 
-  const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
-  const mediaHeight = 400 + scrollProgress * (isMobileState ? 200 : 400);
-  const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
+  // Smooth easing function for better animation
+  const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const easedProgress = easeInOutCubic(scrollProgress);
+  
+  const mediaWidth = 300 + easedProgress * (isMobileState ? 650 : 1250);
+  const mediaHeight = 400 + easedProgress * (isMobileState ? 200 : 400);
+  const textTranslateX = easedProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(' ')[0] : '';
   const restOfTitle = title ? title.split(' ').slice(1).join(' ') : '';
@@ -246,9 +263,13 @@ const ScrollExpandMedia = ({
   return (
     <div
       ref={sectionRef}
-      className='transition-colors duration-700 ease-in-out overflow-x-hidden'
+      className='transition-colors duration-700 ease-in-out overflow-x-hidden fixed inset-0 z-50'
+      style={{
+        height: isAnimationComplete ? 'auto' : '100vh',
+        position: isAnimationComplete ? 'relative' : 'fixed',
+      }}
     >
-      <section className='relative flex flex-col items-center justify-start min-h-[100dvh]'>
+      <section className='relative flex flex-col items-center justify-start h-full'>
         <div className='relative w-full flex flex-col items-center min-h-[100dvh]'>
           <motion.div
             className='absolute inset-0 z-0 h-full'
@@ -274,13 +295,13 @@ const ScrollExpandMedia = ({
           <div className='container mx-auto flex flex-col items-center justify-start relative z-10'>
             <div className='flex flex-col items-center justify-center w-full h-[100dvh] relative'>
               <div
-                className='absolute z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-none rounded-2xl'
+                className='absolute z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 ease-out'
                 style={{
                   width: `${mediaWidth}px`,
                   height: `${mediaHeight}px`,
                   maxWidth: '95vw',
                   maxHeight: '85vh',
-                  boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
+                  boxShadow: `0px 0px ${50 + easedProgress * 30}px rgba(0, 0, 0, ${0.3 + easedProgress * 0.2})`,
                 }}
               >
                 {mediaType === 'video' ? (
@@ -414,9 +435,12 @@ const ScrollExpandMedia = ({
 
             <motion.section
               className='flex flex-col w-full px-8 py-10 md:px-16 lg:py-20'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showContent ? 1 : 0 }}
-              transition={{ duration: 0.7 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ 
+                opacity: showContent && isAnimationComplete ? 1 : 0,
+                y: showContent && isAnimationComplete ? 0 : 50
+              }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               {children}
             </motion.section>
