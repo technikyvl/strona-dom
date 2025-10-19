@@ -137,8 +137,15 @@ const ScrollExpandMedia = ({
     };
 
     const handleScroll = (): void => {
-      // Don't prevent normal scrolling - let the wheel handler manage the animation
-      // This allows normal page scrolling while still enabling the animation
+      // When animation is complete, allow normal scrolling
+      if (isAnimationComplete) {
+        return;
+      }
+      
+      // Only prevent scrolling if the component is in view and not fully expanded
+      if (isComponentInView && !mediaFullyExpanded) {
+        window.scrollTo(0, 0);
+      }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
