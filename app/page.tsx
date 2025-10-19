@@ -1,6 +1,6 @@
 import { HeroSection } from "@/components/hero-section"
 import { ToursSection } from "@/components/tours-section"
-import { InspireSection } from "@/components/inspire-section"
+import { LocationScrollSection } from "@/components/location-scroll-section"
 import { ContactSection } from "@/components/contact-section"
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials"
 import { NavBarClient } from "@/components/ui/tubelight-navbar-wrapper"
@@ -16,7 +16,7 @@ export default function Home() {
           <StaggerTestimonials />
         </section>
         <ToursSection />
-        <InspireSection />
+        <LocationScrollSection />
         <ContactSection />
       </I18nRoot>
     </main>
