@@ -33,9 +33,8 @@ export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, o
               if (once) setHasAnimated(true)
             }
             if (once) observer.unobserve(entry.target)
-          } else if (!once) {
+          } else if (!once && !hasAnimated) {
             setInView(false)
-            setHasAnimated(false)
           }
         })
       },
@@ -44,7 +43,7 @@ export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, o
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [root, rootMargin, threshold, once, delay])
+  }, [root, rootMargin, threshold, once, delay, hasAnimated])
 
   return { ref, inView }
 }
