@@ -209,7 +209,14 @@ const ScrollExpandMedia = ({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsComponentInView(entry.isIntersecting);
+          const isIntersecting = entry.isIntersecting;
+          setIsComponentInView(isIntersecting);
+          
+          if (isIntersecting) {
+            setHasJustEntered(true);
+            // Reset the "just entered" state after a short delay
+            setTimeout(() => setHasJustEntered(false), 500);
+          }
         });
       },
       { threshold: 0.5 }
