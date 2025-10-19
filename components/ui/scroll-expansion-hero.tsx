@@ -50,12 +50,14 @@ const ScrollExpandMedia = ({
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
         setMediaFullyExpanded(false);
-        e.preventDefault();
+        setScrollProgress(0);
+        setShowContent(false);
       } else if (!mediaFullyExpanded) {
-        e.preventDefault();
-        const scrollDelta = e.deltaY * 0.0009;
+        const scrollDelta = e.deltaY * 0.002; // Increased sensitivity
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
           1
@@ -78,16 +80,17 @@ const ScrollExpandMedia = ({
     const handleTouchMove = (e: TouchEvent) => {
       if (!touchStartY) return;
 
+      e.preventDefault();
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
 
       if (mediaFullyExpanded && deltaY < -20 && window.scrollY <= 5) {
         setMediaFullyExpanded(false);
-        e.preventDefault();
+        setScrollProgress(0);
+        setShowContent(false);
       } else if (!mediaFullyExpanded) {
-        e.preventDefault();
-        // Increase sensitivity for mobile, especially when scrolling back
-        const scrollFactor = deltaY < 0 ? 0.008 : 0.005; // Higher sensitivity for scrolling back
+        // Increase sensitivity for mobile
+        const scrollFactor = deltaY < 0 ? 0.01 : 0.008;
         const scrollDelta = deltaY * scrollFactor;
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
@@ -116,10 +119,39 @@ const ScrollExpandMedia = ({
       }
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        e.preventDefault();
+        if (!mediaFullyExpanded) {
+          const scrollDelta = 0.1;
+          const newProgress = Math.min(
+            Math.max(scrollProgress + scrollDelta, 0),
+            1
+          );
+          setScrollProgress(newProgress);
+
+          if (newProgress >= 1) {
+            setMediaFullyExpanded(true);
+            setShowContent(true);
+          } else if (newProgress < 0.75) {
+            setShowContent(false);
+          }
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        if (mediaFullyExpanded && window.scrollY <= 5) {
+          setMediaFullyExpanded(false);
+          setScrollProgress(0);
+          setShowContent(false);
+        }
+      }
+    };
+
     window.addEventListener('wheel', handleWheel as unknown as EventListener, {
       passive: false,
     });
     window.addEventListener('scroll', handleScroll as EventListener);
+    window.addEventListener('keydown', handleKeyDown as EventListener);
     window.addEventListener(
       'touchstart',
       handleTouchStart as unknown as EventListener,
@@ -138,6 +170,7 @@ const ScrollExpandMedia = ({
         handleWheel as unknown as EventListener
       );
       window.removeEventListener('scroll', handleScroll as EventListener);
+      window.removeEventListener('keydown', handleKeyDown as EventListener);
       window.removeEventListener(
         'touchstart',
         handleTouchStart as unknown as EventListener
@@ -303,6 +336,16 @@ const ScrollExpandMedia = ({
                     >
                       {scrollToExpand}
                     </p>
+                  )}
+                  
+                  {/* Scroll indicator */}
+                  {!mediaFullyExpanded && (
+                    <div className='absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/80'>
+                      <div className='w-6 h-10 border-2 border-white/60 rounded-full flex justify-center'>
+                        <div className='w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce'></div>
+                      </div>
+                      <p className='text-sm mt-2'>Scroll to expand</p>
+                    </div>
                   )}
                 </div>
               </div>
