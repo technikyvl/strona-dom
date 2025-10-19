@@ -22,19 +22,20 @@ export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, o
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
+          if (entry.isIntersecting) {
             if (delay > 0) {
               setTimeout(() => {
                 setInView(true)
-                setHasAnimated(true)
+                if (once) setHasAnimated(true)
               }, delay)
             } else {
               setInView(true)
-              setHasAnimated(true)
+              if (once) setHasAnimated(true)
             }
             if (once) observer.unobserve(entry.target)
-          } else if (!once && !entry.isIntersecting) {
+          } else if (!once) {
             setInView(false)
+            setHasAnimated(false)
           }
         })
       },
@@ -43,7 +44,7 @@ export function useInView({ root = null, rootMargin = "0px", threshold = 0.15, o
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [root, rootMargin, threshold, once, delay, hasAnimated])
+  }, [root, rootMargin, threshold, once, delay])
 
   return { ref, inView }
 }
