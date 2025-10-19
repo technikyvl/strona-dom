@@ -40,6 +40,7 @@ const ScrollExpandMedia = ({
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
   const [isComponentInView, setIsComponentInView] = useState<boolean>(false);
+  const [hasJustEntered, setHasJustEntered] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -54,13 +55,15 @@ const ScrollExpandMedia = ({
       // Only handle scroll if the component is in view
       if (!isComponentInView) return; // Allow normal scrolling if not in view
       
-      e.preventDefault();
-      
+      // Only prevent default if we're actually going to handle the scroll
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
+        e.preventDefault();
         setMediaFullyExpanded(false);
         setScrollProgress(0);
         setShowContent(false);
-      } else if (!mediaFullyExpanded) {
+      } else if (!mediaFullyExpanded && e.deltaY > 0) {
+        // Only prevent default when scrolling down to expand
+        e.preventDefault();
         const scrollDelta = e.deltaY * 0.002; // Increased sensitivity
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
@@ -75,6 +78,7 @@ const ScrollExpandMedia = ({
           setShowContent(false);
         }
       }
+      // If scrolling up and not fully expanded, allow normal scroll
     };
 
     const handleTouchStart = (e: TouchEvent) => {
@@ -121,10 +125,8 @@ const ScrollExpandMedia = ({
     };
 
     const handleScroll = (): void => {
-      // Only prevent scrolling if the component is in view and not fully expanded
-      if (isComponentInView && !mediaFullyExpanded) {
-        window.scrollTo(0, 0);
-      }
+      // Don't prevent normal scrolling - let the wheel handler manage the animation
+      // This allows normal page scrolling while still enabling the animation
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
