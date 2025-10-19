@@ -42,8 +42,8 @@ export function LocationCarouselSection() {
   ];
 
   return (
-    <section id="lokalizacja" ref={ref as any} className="h-screen bg-white flex items-center">
-      <div className="container mx-auto px-6">
+    <section id="lokalizacja" ref={ref as any} className="min-h-screen bg-white flex items-center py-20">
+      <div className="container mx-auto px-6 w-full">
         {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <p className="text-foreground/60 text-sm uppercase tracking-widest mb-3">{t("locationTitle")}</p>
