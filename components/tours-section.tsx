@@ -32,7 +32,7 @@ const features = [
 ]
 
 export function ToursSection() {
-  const { ref, inView } = useInView({ threshold: 0.15, once: false })
+  const { ref, inView } = useInView({ threshold: 0.15, once: true })
   const { t } = useI18n()
   return (
     <section id="udogodnienia" ref={ref as any} className="h-screen bg-white flex items-center">
@@ -44,12 +44,12 @@ export function ToursSection() {
         </div>
 
         {/* Tours Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {features.map((feature, index) => (
             <Card
               key={feature.id}
               className={`group relative overflow-hidden bg-transparent border-none cursor-pointer transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              style={{ transitionDelay: `${index * 200 + 500}ms` }}
             >
               <div className="relative h-[400px] overflow-hidden">
                 <img
