@@ -60,28 +60,6 @@ export function LocationCarouselSection() {
           <Carousel slides={houseSlides} />
         </div>
 
-        {/* Additional Info */}
-        <div className={`mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-1000 ease-out delay-500 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <div className="bg-muted/50 rounded-2xl p-6">
-            <h3 className="text-xl font-semibold mb-4 text-foreground">Blisko stoków</h3>
-            <ul className="space-y-2 text-foreground/70">
-              <li>• Skrzyczne - 850 m</li>
-              <li>• SMR - 2,8 km</li>
-              <li>• Beskid Sport Arena - 2,2 km</li>
-              <li>• SKIBUS - 200 m</li>
-            </ul>
-          </div>
-          
-          <div className="bg-muted/50 rounded-2xl p-6">
-            <h3 className="text-xl font-semibold mb-4 text-foreground">W centrum</h3>
-            <ul className="space-y-2 text-foreground/70">
-              <li>• Restauracje i kawiarnie</li>
-              <li>• Sklepy i supermarkety</li>
-              <li>• Spokojna okolica</li>
-              <li>• Łatwy dojazd</li>
-            </ul>
-          </div>
-        </div>
       </div>
     </section>
   );
