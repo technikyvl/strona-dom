@@ -156,7 +156,7 @@ export function Carousel({ slides }: CarouselProps) {
                 current === index ? 'bg-gray-800' : 'bg-gray-300'
               }`}
               aria-label={`${t("carouselPreviousSlide")} ${index + 1}`}
-              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 100 }}
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
             />
           ))}
         </div>
@@ -171,7 +171,7 @@ export function Carousel({ slides }: CarouselProps) {
           className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/90 hover:bg-white active:bg-gray-100 rounded-full transition-colors touch-manipulation shadow-md border border-gray-200"
           title={t("carouselNextSlide")}
           aria-label={t("carouselNextSlide")}
-          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 100 }}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
         >
           <IconArrowNarrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-700" />
         </button>
