@@ -48,10 +48,10 @@ function GalleryContent() {
           {/* Header */}
           <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-serif-brand mb-4">
-              Galeria
+              {t("galleryTitle")}
             </h1>
             <p className="text-foreground/60 text-lg max-w-2xl mx-auto">
-              Zobacz więcej zdjęć naszego domu i wnętrz
+              {t("gallerySubtitle")}
             </p>
           </div>
 
