@@ -3,12 +3,10 @@
 import { Carousel } from "@/components/ui/carousel";
 import { useI18n } from "@/components/ui/lang";
 import { useInView } from "@/lib/use-in-view";
-import { useRouter } from "next/navigation";
 
 export function LocationCarouselSection() {
   const { t } = useI18n();
   const { ref, inView } = useInView({ threshold: 0.15, once: true });
-  const router = useRouter();
 
   const houseSlides = [
     {
