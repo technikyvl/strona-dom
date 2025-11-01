@@ -179,13 +179,26 @@ export function NavBar({ items, className }: NavBarProps) {
             // Handle hash links (sections on home page)
             if (item.url.includes("#")) {
               e.preventDefault()
+              e.stopPropagation()
               const hash = item.url.split('#')[1]
               if (pathname === '/') {
                 // On home page, scroll to section
-                const el = document.querySelector(`#${hash}`)
+                const el = document.getElementById(hash)
                 if (el) {
-                  el.scrollIntoView({ behavior: "smooth", block: "start" })
+                  // Get navbar height for offset
+                  const navbarHeight = 100
+                  const elementPosition = el.getBoundingClientRect().top + window.pageYOffset
+                  const offsetPosition = elementPosition - navbarHeight
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                  })
+                  
+                  // Update URL without triggering scroll
                   window.history.pushState(null, "", `#${hash}`)
+                } else {
+                  console.error(`Element with id "${hash}" not found`)
                 }
               } else {
                 // On other pages, navigate to home page with hash

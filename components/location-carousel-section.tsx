@@ -48,7 +48,7 @@ export function LocationCarouselSection() {
   ];
 
   return (
-    <section id="lokalizacja" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-16 md:py-20">
+    <section id="lokalizacja" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-16 md:py-20 relative z-10 scroll-mt-24">
       <div className="container mx-auto px-4 sm:px-6 w-full">
         {/* Section Header */}
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
@@ -62,7 +62,7 @@ export function LocationCarouselSection() {
         </div>
 
         {/* Carousel */}
-        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-20`}>
           <Carousel slides={houseSlides} />
         </div>
       </div>

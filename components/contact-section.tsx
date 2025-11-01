@@ -154,7 +154,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
   }
 
   return (
-    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-16 md:py-20">
+    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-16 md:py-20 relative z-10 scroll-mt-24">
       <div className="container mx-auto px-4 sm:px-6 w-full">
         <div className={`text-center mb-8 sm:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
@@ -163,12 +163,12 @@ ${t("message")}: ${formData.message.trim() || "-"}`
 
         <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Contact Info */}
-          <div className={`lg:col-span-1 space-y-4 sm:space-y-6 transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <a href="tel:+48501558530" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation">
+          <div className={`lg:col-span-1 space-y-4 sm:space-y-6 transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-20`}>
+            <a href="tel:+48501558530" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-30 cursor-pointer">
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("phone")}</div>
               <div className="mt-2 text-base sm:text-lg font-semibold break-all">+48 501 558 530</div>
             </a>
-            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation">
+            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-30 cursor-pointer">
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("email")}</div>
               <div className="mt-2 text-sm sm:text-lg font-semibold break-all">kontakt@szczyrkdom.pl</div>
             </a>
@@ -179,7 +179,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
           </div>
 
           {/* Contact Form */}
-          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-20`}>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
