@@ -64,13 +64,16 @@ export default function GalleryPage() {
                   className="group relative overflow-hidden rounded-2xl aspect-square cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                   style={{ transitionDelay: `${index * 50}ms` }}
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                  </div>
                 </div>
               ))}
             </div>
