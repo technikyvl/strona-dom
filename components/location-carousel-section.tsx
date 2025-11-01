@@ -6,7 +6,7 @@ import { useInView } from "@/lib/use-in-view";
 
 export function LocationCarouselSection() {
   const { t } = useI18n();
-  const { ref, inView } = useInView({ threshold: 0.05, once: false });
+  const { ref, inView } = useInView({ threshold: 0.15, once: true });
 
   const houseSlides = [
     {
@@ -68,7 +68,7 @@ export function LocationCarouselSection() {
     >
       <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}>
         {/* Section Header */}
-        <div className={`text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+        <div className={`text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <p className="text-foreground/60 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">{t("locationTitle")}</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand mb-3 sm:mb-4 md:mb-6 lg:mb-8 px-4">
             {t("locationTitle")}
@@ -79,7 +79,7 @@ export function LocationCarouselSection() {
         </div>
 
         {/* Carousel */}
-        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 102, pointerEvents: 'auto' }}>
+        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ position: 'relative', zIndex: 102, pointerEvents: 'auto' }}>
           <Carousel slides={houseSlides} />
         </div>
       </div>

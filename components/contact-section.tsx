@@ -5,7 +5,7 @@ import { useI18n } from "@/components/ui/lang"
 import { useState } from "react"
 
 export function ContactSection() {
-  const { ref, inView } = useInView({ threshold: 0.05, once: false })
+  const { ref, inView } = useInView({ threshold: 0.15, once: true })
   const { t } = useI18n()
   const [formData, setFormData] = useState({
     checkIn: "",
@@ -118,14 +118,14 @@ ${t("message")}: ${formData.message.trim() || "-"}`
       style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}
     >
       <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}>
-        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
           <p className="text-foreground/60 mt-2 sm:mt-3 text-sm sm:text-base md:text-lg">{t("contactSubtitle")}</p>
         </div>
 
         <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8" style={{ position: 'relative', zIndex: 102, pointerEvents: 'auto' }}>
           {/* Contact Info */}
-          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ pointerEvents: 'auto' }}>
+          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ pointerEvents: 'auto' }}>
             <a 
               href="tel:+48501558530" 
               className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition shadow-sm hover:shadow-md"
@@ -149,7 +149,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
           </div>
 
           {/* Contact Form */}
-          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 103, pointerEvents: 'auto' }}>
+          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ position: 'relative', zIndex: 103, pointerEvents: 'auto' }}>
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6" style={{ pointerEvents: 'auto', position: 'relative', zIndex: 200 }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 <div>
