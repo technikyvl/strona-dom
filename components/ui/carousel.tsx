@@ -1,6 +1,7 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { useState, useId } from "react";
+import { useI18n } from "@/components/ui/lang";
 
 interface SlideData {
   title: string;
@@ -15,6 +16,7 @@ interface CarouselProps {
 
 export function Carousel({ slides }: CarouselProps) {
   const [current, setCurrent] = useState(0);
+  const { t } = useI18n();
 
   const handlePreviousClick = () => {
     const previous = current - 1;

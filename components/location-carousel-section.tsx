@@ -13,39 +13,39 @@ export function LocationCarouselSection() {
   const houseSlides = [
     {
       title: t("carouselHouseOutside"),
-      button: t("carouselSeeMore"),
+      button: t("carouselViewOnMap"),
       src: "/dom na zewnatrz 2-kopia.jpeg",
-      onClick: () => router.push("/galeria"),
+      onClick: () => window.open("https://maps.app.goo.gl/NMgGnAuTGomF5pBXA", "_blank"),
     },
     {
       title: t("carouselSpaciousSalon"),
-      button: t("carouselSeeMore"),
+      button: t("carouselViewOnMap"),
       src: "/salon 1-kopia.jpeg",
-      onClick: () => router.push("/galeria"),
+      onClick: () => window.open("https://maps.app.goo.gl/NMgGnAuTGomF5pBXA", "_blank"),
     },
     {
       title: t("carouselGuestSauna"),
-      button: t("carouselSeeMore"),
+      button: t("carouselViewOnMap"),
       src: "/sauna 1-kopia.jpeg",
-      onClick: () => router.push("/galeria"),
+      onClick: () => window.open("https://maps.app.goo.gl/NMgGnAuTGomF5pBXA", "_blank"),
     },
     {
       title: t("carouselMasterBedroom"),
-      button: t("carouselSeeMore"),
+      button: t("carouselViewOnMap"),
       src: "/sypialnia 1-kopia.jpeg",
-      onClick: () => router.push("/galeria"),
+      onClick: () => window.open("https://maps.app.goo.gl/NMgGnAuTGomF5pBXA", "_blank"),
     },
     {
       title: t("carouselModernKitchen"),
-      button: t("carouselSeeMore"),
+      button: t("carouselViewOnMap"),
       src: "/salon 2-kopia.jpeg",
-      onClick: () => router.push("/galeria"),
+      onClick: () => window.open("https://maps.app.goo.gl/NMgGnAuTGomF5pBXA", "_blank"),
     },
     {
       title: t("carouselTerraceGrill"),
-      button: t("carouselSeeMore"),
+      button: t("carouselViewOnMap"),
       src: "/plac zabaw-kopia.jpeg",
-      onClick: () => router.push("/galeria"),
+      onClick: () => window.open("https://maps.app.goo.gl/NMgGnAuTGomF5pBXA", "_blank"),
     },
   ];
 
