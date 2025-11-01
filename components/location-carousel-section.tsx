@@ -6,7 +6,7 @@ import { useInView } from "@/lib/use-in-view";
 
 export function LocationCarouselSection() {
   const { t } = useI18n();
-  const { ref, inView } = useInView({ threshold: 0.15, once: true });
+  const { ref, inView } = useInView({ threshold: 0.15, once: true, rootMargin: "-50px" });
 
   const houseSlides = [
     {
@@ -62,7 +62,7 @@ export function LocationCarouselSection() {
   return (
     <section 
       id="lokalizacja" 
-      ref={ref as any} 
+      ref={ref as any}
       className="min-h-screen bg-white flex items-center py-8 pb-20 sm:pb-12 md:pb-16 lg:pb-20 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
       style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}
     >
