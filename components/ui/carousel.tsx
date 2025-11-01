@@ -89,7 +89,7 @@ export function Carousel({ slides }: CarouselProps) {
         <button
           onClick={handlePreviousClick}
           className="w-12 h-12 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
-          title="Poprzedni slajd"
+          title={t("carouselPreviousSlide")}
         >
           <IconArrowNarrowRight className="w-6 h-6 text-gray-600 rotate-180" />
         </button>
@@ -110,7 +110,7 @@ export function Carousel({ slides }: CarouselProps) {
         <button
           onClick={handleNextClick}
           className="w-12 h-12 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
-          title="Następny slajd"
+          title={t("carouselNextSlide")}
         >
           <IconArrowNarrowRight className="w-6 h-6 text-gray-600" />
         </button>
