@@ -25,11 +25,19 @@ export function ContactSection() {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     
+    // Validate all required fields
     if (!formData.checkIn || !formData.checkOut || !formData.people || !formData.name || !formData.email || !formData.phone) {
       alert(t("fillAllFields"))
+      return
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      alert("Proszę podać poprawny adres email")
       return
     }
 
@@ -49,30 +57,33 @@ ${t("phoneNumber")}: ${formData.phone}
 
 ${t("message")}: ${formData.message || "-"}`
 
-    try {
-      // Open email client
-      const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent(t("askAvailability"))}&body=${encodeURIComponent(emailBody)}`
-      window.location.href = mailtoLink
-      
-      // Reset form after a delay
-      setTimeout(() => {
-        setIsSubmitting(false)
-        setFormData({
-          checkIn: "",
-          checkOut: "",
-          people: "",
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-        })
-        alert(t("formSent"))
-      }, 500)
-    } catch (error) {
-      console.error("Error sending form:", error)
+    // Create and open mailto link
+    const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent(t("askAvailability"))}&body=${encodeURIComponent(emailBody)}`
+    
+    // Open email client in a new window/tab
+    const mailtoWindow = window.open(mailtoLink, '_blank')
+    
+    // Reset form
+    setFormData({
+      checkIn: "",
+      checkOut: "",
+      people: "",
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    })
+    
+    // Show success message after a short delay
+    setTimeout(() => {
       setIsSubmitting(false)
-      alert(t("formError"))
-    }
+      if (mailtoWindow) {
+        alert(t("formSent"))
+      } else {
+        // If popup was blocked, still show success but mention they need to allow popups
+        alert(t("formSent") + "\n\nJeśli okno się nie otworzyło, sprawdź czy blokujesz wyskakujące okna.")
+      }
+    }, 300)
   }
 
   return (
