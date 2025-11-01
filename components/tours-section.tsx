@@ -37,7 +37,7 @@ export function ToursSection() {
   const { t } = useI18n()
   const router = useRouter()
   return (
-    <section id="udogodnienia" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-20">
+    <section id="udogodnienia" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 pb-20 sm:pb-20 sm:py-20">
       <div className="container mx-auto px-4 sm:px-6 w-full">
         {/* Section Header */}
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
