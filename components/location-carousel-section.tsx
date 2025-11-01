@@ -12,35 +12,40 @@ export function LocationCarouselSection() {
 
   const houseSlides = [
     {
-      title: "Dom z zewnątrz",
-      button: "Zobacz więcej",
+      title: t("carouselHouseOutside"),
+      button: t("carouselSeeMore"),
       src: "/dom na zewnatrz 2-kopia.jpeg",
       onClick: () => router.push("/galeria"),
     },
     {
-      title: "Przestronny salon",
-      button: "Zobacz więcej",
+      title: t("carouselSpaciousSalon"),
+      button: t("carouselSeeMore"),
       src: "/salon 1-kopia.jpeg",
+      onClick: () => router.push("/galeria"),
     },
     {
-      title: "Sauna dla gości",
-      button: "Zobacz więcej",
+      title: t("carouselGuestSauna"),
+      button: t("carouselSeeMore"),
       src: "/sauna 1-kopia.jpeg",
+      onClick: () => router.push("/galeria"),
     },
     {
-      title: "Sypialnia główna",
-      button: "Zobacz więcej",
+      title: t("carouselMasterBedroom"),
+      button: t("carouselSeeMore"),
       src: "/sypialnia 1-kopia.jpeg",
+      onClick: () => router.push("/galeria"),
     },
     {
-      title: "Nowoczesna kuchnia",
-      button: "Zobacz więcej",
+      title: t("carouselModernKitchen"),
+      button: t("carouselSeeMore"),
       src: "/salon 2-kopia.jpeg",
+      onClick: () => router.push("/galeria"),
     },
     {
-      title: "Taras z grillem",
-      button: "Zobacz więcej",
+      title: t("carouselTerraceGrill"),
+      button: t("carouselSeeMore"),
       src: "/plac zabaw-kopia.jpeg",
+      onClick: () => router.push("/galeria"),
     },
   ];
 
