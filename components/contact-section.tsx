@@ -115,20 +115,21 @@ ${t("message")}: ${formData.message.trim() || "-"}`
       id="kontakt" 
       ref={ref as any} 
       className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
-      style={{ position: 'relative', zIndex: 1 }}
+      style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}
     >
-      <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 2 }}>
+      <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}>
         <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
           <p className="text-foreground/60 mt-2 sm:mt-3 text-sm sm:text-base md:text-lg">{t("contactSubtitle")}</p>
         </div>
 
-        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8" style={{ position: 'relative', zIndex: 3 }}>
+        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8" style={{ position: 'relative', zIndex: 102, pointerEvents: 'auto' }}>
           {/* Contact Info */}
-          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ pointerEvents: 'auto' }}>
             <a 
               href="tel:+48501558530" 
               className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition shadow-sm hover:shadow-md"
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 200 }}
             >
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("phone")}</div>
               <div className="mt-1 sm:mt-2 text-sm sm:text-base md:text-lg font-semibold break-all">+48 501 558 530</div>
@@ -136,6 +137,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
             <a 
               href="mailto:kontakt@szczyrkdom.pl" 
               className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition shadow-sm hover:shadow-md"
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 200 }}
             >
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("email")}</div>
               <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-lg font-semibold break-all">kontakt@szczyrkdom.pl</div>
@@ -147,8 +149,8 @@ ${t("message")}: ${formData.message.trim() || "-"}`
           </div>
 
           {/* Contact Form */}
-          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 4 }}>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
+          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 103, pointerEvents: 'auto' }}>
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6" style={{ pointerEvents: 'auto' }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 <div>
                   <label htmlFor="checkIn" className="block text-xs sm:text-sm font-medium text-foreground mb-1.5 sm:mb-2">

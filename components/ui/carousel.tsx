@@ -62,14 +62,14 @@ export function Carousel({ slides }: CarouselProps) {
   const id = useId();
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto overflow-x-hidden" style={{ position: 'relative', zIndex: 10 }}>
+    <div className="relative w-full max-w-6xl mx-auto overflow-x-hidden" style={{ position: 'relative', zIndex: 150, pointerEvents: 'auto' }}>
       {/* Main carousel container */}
       <div 
         className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 touch-pan-y"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        style={{ position: 'relative', zIndex: 11 }}
+        style={{ position: 'relative', zIndex: 151, pointerEvents: 'auto' }}
       >
         <div
           className="flex transition-transform duration-500 ease-in-out will-change-transform"
@@ -113,7 +113,7 @@ export function Carousel({ slides }: CarouselProps) {
                       }
                     }}
                     className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer touch-manipulation text-xs sm:text-sm md:text-base shadow-lg min-h-[40px] sm:min-h-[44px]"
-                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 250, cursor: 'pointer' }}
                   >
                     {slide.button}
                   </button>
@@ -125,7 +125,7 @@ export function Carousel({ slides }: CarouselProps) {
       </div>
 
       {/* Navigation controls */}
-      <div className="flex justify-center items-center mt-3 sm:mt-4 md:mt-6 space-x-2 sm:space-x-3 md:space-x-4 px-2 sm:px-4" style={{ position: 'relative', zIndex: 12 }}>
+      <div className="flex justify-center items-center mt-3 sm:mt-4 md:mt-6 space-x-2 sm:space-x-3 md:space-x-4 px-2 sm:px-4" style={{ position: 'relative', zIndex: 152, pointerEvents: 'auto' }}>
         <button
           type="button"
           onClick={(e) => {
@@ -136,7 +136,7 @@ export function Carousel({ slides }: CarouselProps) {
           className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/90 hover:bg-white active:bg-gray-100 rounded-full transition-colors touch-manipulation shadow-md border border-gray-200"
           title={t("carouselPreviousSlide")}
           aria-label={t("carouselPreviousSlide")}
-          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 250, cursor: 'pointer' }}
         >
           <IconArrowNarrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-700 rotate-180" />
         </button>
@@ -156,7 +156,7 @@ export function Carousel({ slides }: CarouselProps) {
                 current === index ? 'bg-gray-800' : 'bg-gray-300'
               }`}
               aria-label={`${t("carouselPreviousSlide")} ${index + 1}`}
-              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 250, cursor: 'pointer' }}
             />
           ))}
         </div>
@@ -171,7 +171,7 @@ export function Carousel({ slides }: CarouselProps) {
           className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/90 hover:bg-white active:bg-gray-100 rounded-full transition-colors touch-manipulation shadow-md border border-gray-200"
           title={t("carouselNextSlide")}
           aria-label={t("carouselNextSlide")}
-          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 250, cursor: 'pointer' }}
         >
           <IconArrowNarrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-700" />
         </button>

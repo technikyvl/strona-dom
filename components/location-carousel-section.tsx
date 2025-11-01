@@ -64,9 +64,9 @@ export function LocationCarouselSection() {
       id="lokalizacja" 
       ref={ref as any} 
       className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
-      style={{ position: 'relative', zIndex: 1 }}
+      style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}
     >
-      <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 2 }}>
+      <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}>
         {/* Section Header */}
         <div className={`text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
           <p className="text-foreground/60 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">{t("locationTitle")}</p>
@@ -79,7 +79,7 @@ export function LocationCarouselSection() {
         </div>
 
         {/* Carousel */}
-        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 3 }}>
+        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 102, pointerEvents: 'auto' }}>
           <Carousel slides={houseSlides} />
         </div>
       </div>
