@@ -1,6 +1,6 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { useState, useId, useEffect } from "react";
+import { useState, useId } from "react";
 
 interface SlideData {
   title: string;
@@ -31,57 +31,12 @@ export function Carousel({ slides }: CarouselProps) {
     }
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        handlePreviousClick();
-      } else if (event.key === 'ArrowRight') {
-        handleNextClick();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [current]);
-
-  // Touch/swipe support
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      handleNextClick();
-    } else if (isRightSwipe) {
-      handlePreviousClick();
-    }
-  };
-
   const id = useId();
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full max-w-4xl mx-auto">
       {/* Main carousel container */}
-      <div 
-        className="relative overflow-hidden rounded-2xl bg-gray-100"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className="relative overflow-hidden rounded-2xl bg-gray-100">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
@@ -92,7 +47,7 @@ export function Carousel({ slides }: CarouselProps) {
             <div
               key={index}
               className="w-full flex-shrink-0 relative"
-              style={{ height: '600px' }}
+              style={{ height: '400px' }}
             >
               <div className="relative w-full h-full">
                 <img
@@ -100,16 +55,16 @@ export function Carousel({ slides }: CarouselProps) {
                   alt={slide.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/30" />
+                <div className="absolute inset-0 bg-black/40" />
                 
                 {/* Content overlay */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-8 text-center">
-                  <h3 className="text-3xl md:text-5xl font-bold mb-6">
+                  <h3 className="text-2xl md:text-4xl font-bold mb-4">
                     {slide.title}
                   </h3>
                   <button
                     onClick={() => handleSlideClick(index)}
-                    className="px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-gray-100 transition-colors text-lg"
+                    className="px-6 py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 transition-colors"
                   >
                     {slide.button}
                   </button>
