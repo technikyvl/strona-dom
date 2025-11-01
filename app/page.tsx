@@ -8,7 +8,7 @@ import { I18nRoot } from "@/components/ui/i18n-root"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background" style={{ position: 'relative' }}>
       <I18nRoot>
         <NavBarClient />
         <HeroSection />
