@@ -25,25 +25,49 @@ export function ContactSection() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    e.stopPropagation()
+    
+    console.log("Form submit handler called", { formData, isSubmitting })
+    
+    // Prevent double submission
+    if (isSubmitting) {
+      console.log("Already submitting, ignoring")
+      return
+    }
     
     // Validate all required fields
-    if (!formData.checkIn || !formData.checkOut || !formData.people || !formData.name || !formData.email || !formData.phone) {
+    const trimmedName = formData.name.trim()
+    const trimmedEmail = formData.email.trim()
+    const trimmedPhone = formData.phone.trim()
+    
+    console.log("Validating fields", { 
+      checkIn: formData.checkIn, 
+      checkOut: formData.checkOut, 
+      people: formData.people,
+      name: trimmedName,
+      email: trimmedEmail,
+      phone: trimmedPhone
+    })
+    
+    if (!formData.checkIn || !formData.checkOut || !formData.people || !trimmedName || !trimmedEmail || !trimmedPhone) {
+      console.log("Validation failed - missing required fields")
       alert(t("fillAllFields"))
       return
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) {
+    if (!emailRegex.test(trimmedEmail)) {
       alert(t("invalidEmail"))
       return
     }
 
     setIsSubmitting(true)
+    console.log("Setting isSubmitting to true")
     
-    // Create email body
+    // Create email body with trimmed values
     const emailBody = `${t("askAvailability")}:
 
 ${t("checkInDate")}: ${formData.checkIn}
@@ -51,16 +75,20 @@ ${t("checkOutDate")}: ${formData.checkOut}
 ${t("numberOfPeople")}: ${formData.people}
 
 ${t("contactTitle")}:
-${t("name")}: ${formData.name}
-${t("email")}: ${formData.email}
-${t("phoneNumber")}: ${formData.phone}
+${t("name")}: ${trimmedName}
+${t("email")}: ${trimmedEmail}
+${t("phoneNumber")}: ${trimmedPhone}
 
-${t("message")}: ${formData.message || "-"}`
+${t("message")}: ${formData.message.trim() || "-"}`
 
     // Create and open mailto link
-    const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent(t("askAvailability"))}&body=${encodeURIComponent(emailBody)}`
+    const subject = encodeURIComponent(t("askAvailability"))
+    const body = encodeURIComponent(emailBody)
+    const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${subject}&body=${body}`
     
-    // Reset form immediately
+    console.log("Created mailto link:", mailtoLink.substring(0, 100) + "...")
+    
+    // Reset form immediately (before opening mailto)
     setFormData({
       checkIn: "",
       checkOut: "",
@@ -71,30 +99,58 @@ ${t("message")}: ${formData.message || "-"}`
       message: "",
     })
     
-    // Open email client using a more reliable method
+    console.log("Form data reset")
+    
+    // Open email client using multiple methods for maximum compatibility
+    let emailOpened = false
+    
     try {
-      // Create a temporary anchor element and click it
+      // Method 1: Try creating a link and clicking it
+      console.log("Trying method 1: createElement and click")
       const link = document.createElement('a')
       link.href = mailtoLink
-      link.target = '_blank'
+      link.style.display = 'none'
+      link.setAttribute('data-mailto', 'true')
       document.body.appendChild(link)
       link.click()
-      document.body.removeChild(link)
-      
-      // Show success message after a short delay
+      // Wait a bit before removing to ensure click is processed
       setTimeout(() => {
-        setIsSubmitting(false)
-        alert(t("formSent"))
-      }, 300)
+        if (document.body.contains(link)) {
+          document.body.removeChild(link)
+        }
+      }, 100)
+      emailOpened = true
+      console.log("Method 1 executed")
     } catch (error) {
-      console.error("Error opening email client:", error)
-      setIsSubmitting(false)
-      // Fallback: try window.location.href
-      window.location.href = mailtoLink
-      setTimeout(() => {
-        alert(t("formSent"))
-      }, 500)
+      console.error("Method 1 failed:", error)
     }
+    
+    // Method 2: Fallback to window.location.href (only if method 1 didn't work)
+    if (!emailOpened) {
+      try {
+        console.log("Trying method 2: window.location.href")
+        // Use setTimeout to ensure the form reset happens first
+        setTimeout(() => {
+          window.location.href = mailtoLink
+        }, 100)
+        emailOpened = true
+        console.log("Method 2 executed")
+      } catch (error) {
+        console.error("Method 2 failed:", error)
+      }
+    }
+    
+    // Show success message and reset submitting state
+    setTimeout(() => {
+      console.log("Showing success message", { emailOpened })
+      setIsSubmitting(false)
+      if (emailOpened) {
+        alert(t("formSent"))
+      } else {
+        // If all methods failed, show error but still confirm form was processed
+        alert(t("formError"))
+      }
+    }, 500)
   }
 
   return (
