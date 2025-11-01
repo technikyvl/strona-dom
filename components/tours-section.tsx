@@ -37,23 +37,24 @@ export function ToursSection() {
   const { t } = useI18n()
   const router = useRouter()
   return (
-    <section id="udogodnienia" ref={ref as any} className="h-screen bg-white flex items-center">
-      <div className="container mx-auto px-6">
+    <section id="udogodnienia" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6 w-full">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <p className="text-foreground/60 text-sm uppercase tracking-widest mb-3">{t("amenitiesSubtitle")}</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("amenities")}</h2>
+        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+          <p className="text-foreground/60 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">{t("amenitiesSubtitle")}</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("amenities")}</h2>
         </div>
 
         {/* Tours Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {features.map((feature, index) => (
             <Card
               key={feature.id}
-              className={`group relative overflow-hidden bg-transparent border-none cursor-pointer transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}
+              className={`group relative overflow-hidden bg-transparent border-none cursor-pointer transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 active:scale-95 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}
               style={{ transitionDelay: `${index * 200 + 500}ms` }}
               onClick={(e) => {
                 e.preventDefault()
+                e.stopPropagation()
                 router.push("/galeria")
               }}
               onKeyDown={(e) => {
@@ -65,7 +66,7 @@ export function ToursSection() {
               role="button"
               tabIndex={0}
             >
-              <div className="relative h-[400px] overflow-hidden pointer-events-none">
+              <div className="relative h-[280px] sm:h-[350px] md:h-[400px] overflow-hidden pointer-events-none">
                 <img
                   src={feature.image || "/placeholder.svg"}
                   alt={t(feature.titleKey as any)}
@@ -74,9 +75,9 @@ export function ToursSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2 pointer-events-none">
-                  <h3 className="text-2xl font-bold text-white mb-2">{t(feature.titleKey as any)}</h3>
-                  <p className="text-white/70 text-sm">{t(feature.subtitleKey as any)}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 transition-transform duration-500 group-hover:-translate-y-2 pointer-events-none">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">{t(feature.titleKey as any)}</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">{t(feature.subtitleKey as any)}</p>
                 </div>
               </div>
             </Card>

@@ -71,43 +71,61 @@ ${t("message")}: ${formData.message || "-"}`
       message: "",
     })
     
-    // Show success message
-    alert(t("formSent"))
-    setIsSubmitting(false)
-    
-    // Open email client (this will work on most systems)
-    window.location.href = mailtoLink
+    // Open email client using a more reliable method
+    try {
+      // Create a temporary anchor element and click it
+      const link = document.createElement('a')
+      link.href = mailtoLink
+      link.target = '_blank'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      // Show success message after a short delay
+      setTimeout(() => {
+        setIsSubmitting(false)
+        alert(t("formSent"))
+      }, 300)
+    } catch (error) {
+      console.error("Error opening email client:", error)
+      setIsSubmitting(false)
+      // Fallback: try window.location.href
+      window.location.href = mailtoLink
+      setTimeout(() => {
+        alert(t("formSent"))
+      }, 500)
+    }
   }
 
   return (
-    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-20">
-      <div className="container mx-auto px-6">
-        <div className={`text-center mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
-          <p className="text-foreground/60 mt-3">{t("contactSubtitle")}</p>
+    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-16 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 w-full">
+        <div className={`text-center mb-8 sm:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
+          <p className="text-foreground/60 mt-2 sm:mt-3 text-sm sm:text-base">{t("contactSubtitle")}</p>
         </div>
 
-        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Contact Info */}
-          <div className={`lg:col-span-1 space-y-6 transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <a href="tel:+48501558530" className="block rounded-2xl border border-border bg-muted/50 p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted transition">
-              <div className="text-sm uppercase tracking-wider">{t("phone")}</div>
-              <div className="mt-2 text-lg font-semibold">+48 501 558 530</div>
+          <div className={`lg:col-span-1 space-y-4 sm:space-y-6 transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <a href="tel:+48501558530" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation">
+              <div className="text-xs sm:text-sm uppercase tracking-wider">{t("phone")}</div>
+              <div className="mt-2 text-base sm:text-lg font-semibold break-all">+48 501 558 530</div>
             </a>
-            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-2xl border border-border bg-muted/50 p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted transition">
-              <div className="text-sm uppercase tracking-wider">{t("email")}</div>
-              <div className="mt-2 text-lg font-semibold">kontakt@szczyrkdom.pl</div>
+            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation">
+              <div className="text-xs sm:text-sm uppercase tracking-wider">{t("email")}</div>
+              <div className="mt-2 text-sm sm:text-lg font-semibold break-all">kontakt@szczyrkdom.pl</div>
             </a>
-            <div className="rounded-2xl border border-border bg-muted/50 p-6 text-center text-foreground/90">
-              <div className="text-sm uppercase tracking-wider">{t("address")}</div>
-              <div className="mt-2 text-lg font-semibold">{t("addressValue")}</div>
+            <div className="rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-4 sm:p-6 text-center text-foreground/90">
+              <div className="text-xs sm:text-sm uppercase tracking-wider">{t("address")}</div>
+              <div className="mt-2 text-base sm:text-lg font-semibold">{t("addressValue")}</div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="checkIn" className="block text-sm font-medium text-foreground mb-2">
                     {t("checkInDate")} *
@@ -120,7 +138,7 @@ ${t("message")}: ${formData.message || "-"}`
                     onChange={handleChange}
                     required
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-base touch-manipulation min-h-[44px]"
                   />
                 </div>
                 <div>
@@ -135,12 +153,12 @@ ${t("message")}: ${formData.message || "-"}`
                     onChange={handleChange}
                     required
                     min={formData.checkIn || new Date().toISOString().split('T')[0]}
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-base touch-manipulation min-h-[44px]"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="people" className="block text-sm font-medium text-foreground mb-2">
                     {t("numberOfPeople")} *
@@ -151,7 +169,7 @@ ${t("message")}: ${formData.message || "-"}`
                     value={formData.people}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer text-base touch-manipulation min-h-[44px]"
                   >
                     <option value="">{t("selectPeople")}</option>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
@@ -172,12 +190,12 @@ ${t("message")}: ${formData.message || "-"}`
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-base touch-manipulation min-h-[44px]"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     {t("email")} *
@@ -189,7 +207,7 @@ ${t("message")}: ${formData.message || "-"}`
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-base touch-manipulation min-h-[44px]"
                   />
                 </div>
                 <div>
@@ -203,7 +221,7 @@ ${t("message")}: ${formData.message || "-"}`
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-base touch-manipulation min-h-[44px]"
                   />
                 </div>
               </div>
@@ -218,7 +236,7 @@ ${t("message")}: ${formData.message || "-"}`
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none transition-all"
+                  className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none transition-all text-base touch-manipulation"
                   placeholder={t("additionalInfo")}
                 />
               </div>
@@ -226,7 +244,7 @@ ${t("message")}: ${formData.message || "-"}`
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-6 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+                className="w-full py-3 sm:py-3.5 px-6 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 active:bg-primary/95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg text-sm sm:text-base touch-manipulation min-h-[44px]"
               >
                 {isSubmitting ? t("sending") : t("sendInquiry")}
               </button>

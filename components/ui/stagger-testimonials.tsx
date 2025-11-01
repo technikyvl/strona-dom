@@ -47,7 +47,7 @@ export const StaggerTestimonials: React.FC = () => {
   const laneHeight = 140;
   // Duplicate list for seamless loop
   const loop = [...testimonials, ...testimonials];
-  const { locale, t } = useI18n();
+  const { t } = useI18n();
 
   return (
     <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px]">

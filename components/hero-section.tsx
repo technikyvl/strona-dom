@@ -24,10 +24,10 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className={`relative h-full container mx-auto px-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-        <div className="flex items-center h-full justify-end">
-          <div className="max-w-2xl text-left pr-0 md:pr-0 lg:pr-0 mr-4 md:mr-8 lg:mr-12 -translate-y-16 md:-translate-y-20 lg:-translate-y-24 translate-x-10 md:translate-x-18 lg:translate-x-24 px-3 md:px-5 lg:px-6">
-            <h1 className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)] font-lexend uppercase transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}>
+      <div className={`relative h-full container mx-auto px-4 sm:px-6 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className="flex items-center h-full justify-center sm:justify-end">
+          <div className="max-w-2xl text-center sm:text-left -translate-y-12 sm:-translate-y-16 md:-translate-y-20 lg:-translate-y-24 px-4 sm:px-6">
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)] font-lexend uppercase transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}>
               <span className={`block transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>Highlander</span>
               <span className={`block transition-all duration-1000 ease-out delay-500 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>House</span>
               <span className={`block transition-all duration-1000 ease-out delay-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>Szczyrk</span>
