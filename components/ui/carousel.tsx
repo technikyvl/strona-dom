@@ -65,13 +65,13 @@ export function Carousel({ slides }: CarouselProps) {
     <div className="relative w-full max-w-6xl mx-auto overflow-x-hidden">
       {/* Main carousel container */}
       <div 
-        className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 touch-pan-y"
+        className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 touch-pan-y pointer-events-auto z-[60]"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="flex transition-transform duration-500 ease-in-out will-change-transform"
+          className="flex transition-transform duration-500 ease-in-out will-change-transform pointer-events-auto"
           style={{
             transform: `translateX(-${current * 100}%)`,
           }}
@@ -86,17 +86,17 @@ export function Carousel({ slides }: CarouselProps) {
                 minWidth: '100%' 
               }}
             >
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full pointer-events-auto">
                 <img
                   src={slide.src}
                   alt={slide.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-black/40 sm:bg-black/40" />
+                <div className="absolute inset-0 bg-black/40 sm:bg-black/40 pointer-events-none" />
                 
                 {/* Content overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-8 text-center z-10">
-                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-3 sm:mb-4 px-2 sm:px-4 max-w-[90%]">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-8 text-center z-10 pointer-events-none">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-3 sm:mb-4 px-2 sm:px-4 max-w-[90%] pointer-events-none">
                     {slide.title}
                   </h3>
                   <button
@@ -110,7 +110,7 @@ export function Carousel({ slides }: CarouselProps) {
                         handleSlideClick(index);
                       }
                     }}
-                    className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer touch-manipulation text-xs sm:text-sm md:text-base shadow-lg min-h-[40px] sm:min-h-[44px]"
+                    className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer touch-manipulation text-xs sm:text-sm md:text-base shadow-lg min-h-[40px] sm:min-h-[44px] pointer-events-auto relative z-20"
                   >
                     {slide.button}
                   </button>

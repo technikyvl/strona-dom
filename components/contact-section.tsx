@@ -5,7 +5,7 @@ import { useI18n } from "@/components/ui/lang"
 import { useState } from "react"
 
 export function ContactSection() {
-  const { ref, inView } = useInView({ threshold: 0.1, once: false })
+  const { ref, inView } = useInView({ threshold: 0.05, once: false })
   const { t } = useI18n()
   const [formData, setFormData] = useState({
     checkIn: "",
@@ -154,21 +154,21 @@ ${t("message")}: ${formData.message.trim() || "-"}`
   }
 
   return (
-    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 relative z-30 scroll-mt-24">
-      <div className="container mx-auto px-4 sm:px-6 w-full">
-        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 relative z-[45] scroll-mt-24 pointer-events-auto">
+      <div className="container mx-auto px-4 sm:px-6 w-full pointer-events-auto">
+        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out pointer-events-auto ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
           <p className="text-foreground/60 mt-2 sm:mt-3 text-sm sm:text-base md:text-lg">{t("contactSubtitle")}</p>
         </div>
 
-        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 pointer-events-auto">
           {/* Contact Info */}
-          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-40 mb-6 lg:mb-0`}>
-            <a href="tel:+48501558530" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-50 cursor-pointer shadow-sm hover:shadow-md">
+          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 pointer-events-auto relative z-[55] mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+            <a href="tel:+48501558530" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-[60] cursor-pointer shadow-sm hover:shadow-md">
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("phone")}</div>
               <div className="mt-1 sm:mt-2 text-sm sm:text-base md:text-lg font-semibold break-all">+48 501 558 530</div>
             </a>
-            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-50 cursor-pointer shadow-sm hover:shadow-md">
+            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-[60] cursor-pointer shadow-sm hover:shadow-md">
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("email")}</div>
               <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-lg font-semibold break-all">kontakt@szczyrkdom.pl</div>
             </a>
@@ -179,8 +179,8 @@ ${t("message")}: ${formData.message.trim() || "-"}`
           </div>
 
           {/* Contact Form */}
-          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-40`}>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
+          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 pointer-events-auto relative z-[55] ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6 pointer-events-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 <div>
                   <label htmlFor="checkIn" className="block text-xs sm:text-sm font-medium text-foreground mb-1.5 sm:mb-2">
