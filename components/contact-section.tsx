@@ -37,7 +37,7 @@ export function ContactSection() {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
-      alert("Proszę podać poprawny adres email")
+      alert(t("invalidEmail"))
       return
     }
 
@@ -60,10 +60,7 @@ ${t("message")}: ${formData.message || "-"}`
     // Create and open mailto link
     const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent(t("askAvailability"))}&body=${encodeURIComponent(emailBody)}`
     
-    // Open email client in a new window/tab
-    const mailtoWindow = window.open(mailtoLink, '_blank')
-    
-    // Reset form
+    // Reset form immediately
     setFormData({
       checkIn: "",
       checkOut: "",
@@ -74,16 +71,12 @@ ${t("message")}: ${formData.message || "-"}`
       message: "",
     })
     
-    // Show success message after a short delay
-    setTimeout(() => {
-      setIsSubmitting(false)
-      if (mailtoWindow) {
-        alert(t("formSent"))
-      } else {
-        // If popup was blocked, still show success but mention they need to allow popups
-        alert(t("formSent") + "\n\nJeśli okno się nie otworzyło, sprawdź czy blokujesz wyskakujące okna.")
-      }
-    }, 300)
+    // Show success message
+    alert(t("formSent"))
+    setIsSubmitting(false)
+    
+    // Open email client (this will work on most systems)
+    window.location.href = mailtoLink
   }
 
   return (

@@ -52,18 +52,29 @@ export function ToursSection() {
               key={feature.id}
               className={`group relative overflow-hidden bg-transparent border-none cursor-pointer transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}
               style={{ transitionDelay: `${index * 200 + 500}ms` }}
-              onClick={() => router.push("/galeria")}
+              onClick={(e) => {
+                e.preventDefault()
+                router.push("/galeria")
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  router.push("/galeria")
+                }
+              }}
+              role="button"
+              tabIndex={0}
             >
-              <div className="relative h-[400px] overflow-hidden">
+              <div className="relative h-[400px] overflow-hidden pointer-events-none">
                 <img
                   src={feature.image || "/placeholder.svg"}
-                  alt={feature.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  alt={t(feature.titleKey as any)}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2 pointer-events-none">
                   <h3 className="text-2xl font-bold text-white mb-2">{t(feature.titleKey as any)}</h3>
                   <p className="text-white/70 text-sm">{t(feature.subtitleKey as any)}</p>
                 </div>
