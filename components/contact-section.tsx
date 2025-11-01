@@ -29,29 +29,29 @@ export function ContactSection() {
     e.preventDefault()
     
     if (!formData.checkIn || !formData.checkOut || !formData.people || !formData.name || !formData.email || !formData.phone) {
-      alert("Proszę wypełnić wszystkie wymagane pola")
+      alert(t("fillAllFields"))
       return
     }
 
     setIsSubmitting(true)
     
     // Create email body
-    const emailBody = `Nowe zapytanie o dostępność:
+    const emailBody = `${t("askAvailability")}:
 
-Data przyjazdu: ${formData.checkIn}
-Data wyjazdu: ${formData.checkOut}
-Liczba osób: ${formData.people}
+${t("checkInDate")}: ${formData.checkIn}
+${t("checkOutDate")}: ${formData.checkOut}
+${t("numberOfPeople")}: ${formData.people}
 
-Dane kontaktowe:
-Imię i nazwisko: ${formData.name}
-Email: ${formData.email}
-Telefon: ${formData.phone}
+${t("contactTitle")}:
+${t("name")}: ${formData.name}
+${t("email")}: ${formData.email}
+${t("phoneNumber")}: ${formData.phone}
 
-Wiadomość: ${formData.message || "Brak"}`
+${t("message")}: ${formData.message || "-"}`
 
     try {
       // Open email client
-      const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent("Zapytanie o dostępność")}&body=${encodeURIComponent(emailBody)}`
+      const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent(t("askAvailability"))}&body=${encodeURIComponent(emailBody)}`
       window.location.href = mailtoLink
       
       // Reset form after a delay
@@ -66,12 +66,12 @@ Wiadomość: ${formData.message || "Brak"}`
           phone: "",
           message: "",
         })
-        alert("Formularz został wysłany. Sprawdź swoją skrzynkę pocztową.")
+        alert(t("formSent"))
       }, 500)
     } catch (error) {
-      console.error("Błąd podczas wysyłania formularza:", error)
+      console.error("Error sending form:", error)
       setIsSubmitting(false)
-      alert("Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.")
+      alert(t("formError"))
     }
   }
 
@@ -106,7 +106,7 @@ Wiadomość: ${formData.message || "Brak"}`
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="checkIn" className="block text-sm font-medium text-foreground mb-2">
-                    Data przyjazdu *
+                    {t("checkInDate")} *
                   </label>
                   <input
                     type="date"
@@ -115,12 +115,13 @@ Wiadomość: ${formData.message || "Brak"}`
                     value={formData.checkIn}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    min={new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                   />
                 </div>
                 <div>
                   <label htmlFor="checkOut" className="block text-sm font-medium text-foreground mb-2">
-                    Data wyjazdu *
+                    {t("checkOutDate")} *
                   </label>
                   <input
                     type="date"
@@ -129,8 +130,8 @@ Wiadomość: ${formData.message || "Brak"}`
                     value={formData.checkOut}
                     onChange={handleChange}
                     required
-                    min={formData.checkIn}
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    min={formData.checkIn || new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
@@ -138,7 +139,7 @@ Wiadomość: ${formData.message || "Brak"}`
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="people" className="block text-sm font-medium text-foreground mb-2">
-                    Liczba osób *
+                    {t("numberOfPeople")} *
                   </label>
                   <select
                     id="people"
@@ -146,19 +147,19 @@ Wiadomość: ${formData.message || "Brak"}`
                     value={formData.people}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
                   >
-                    <option value="">Wybierz liczbę osób</option>
+                    <option value="">{t("selectPeople")}</option>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                       <option key={num} value={num}>
-                        {num} {num === 1 ? "osoba" : num < 5 ? "osoby" : "osób"}
+                        {num} {num === 1 ? t("person") : num < 5 ? t("people") : t("peopleMany")}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Imię i nazwisko *
+                    {t("name")} *
                   </label>
                   <input
                     type="text"
@@ -167,7 +168,7 @@ Wiadomość: ${formData.message || "Brak"}`
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
@@ -175,7 +176,7 @@ Wiadomość: ${formData.message || "Brak"}`
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email *
+                    {t("email")} *
                   </label>
                   <input
                     type="email"
@@ -184,12 +185,12 @@ Wiadomość: ${formData.message || "Brak"}`
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                   />
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                    Telefon *
+                    {t("phoneNumber")} *
                   </label>
                   <input
                     type="tel"
@@ -198,14 +199,14 @@ Wiadomość: ${formData.message || "Brak"}`
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Wiadomość (opcjonalnie)
+                  {t("messageOptional")}
                 </label>
                 <textarea
                   id="message"
@@ -213,17 +214,17 @@ Wiadomość: ${formData.message || "Brak"}`
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                  placeholder="Dodatkowe informacje..."
+                  className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none transition-all"
+                  placeholder={t("additionalInfo")}
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-6 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 px-6 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
               >
-                {isSubmitting ? "Wysyłanie..." : "Wyślij zapytanie"}
+                {isSubmitting ? t("sending") : t("sendInquiry")}
               </button>
             </form>
           </div>

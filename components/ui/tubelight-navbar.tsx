@@ -34,31 +34,44 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  // Sync active tab with pathname or hash on load and section in-view while scrolling
+  // Update active tab when pathname changes
   useEffect(() => {
     // Check pathname first (for pages like /galeria)
     const pathMatch = items.find(i => {
-      // Check exact match or if pathname matches the URL
-      if (i.url === pathname || pathname?.startsWith(i.url.split('#')[0])) {
-        return true
-      }
+      // Extract base path from URL (remove hash)
+      const baseUrl = i.url.split('#')[0]
+      // Check exact match
+      if (i.url === pathname) return true
+      // Check if pathname matches base URL (e.g., /galeria)
+      if (pathname && baseUrl && pathname === baseUrl) return true
       return false
     })
     
     if (pathMatch) {
       setActiveTab(pathMatch.name)
+      return
     }
     
     // Check hash for home page sections (only if on home page)
     if (pathname === '/') {
       const hash = typeof window !== 'undefined' ? window.location.hash : ''
       if (hash) {
-        const hashMatch = items.find(i => i.url.includes(hash) || i.url.endsWith(hash))
+        const hashMatch = items.find(i => {
+          const hashFromUrl = i.url.split('#')[1]
+          return hashFromUrl && hash === `#${hashFromUrl}`
+        })
         if (hashMatch) {
           setActiveTab(hashMatch.name)
         }
+      } else {
+        // Default to first item if on home page with no hash
+        setActiveTab(items[0]?.name ?? "")
       }
     }
+  }, [pathname, items])
+  
+  // Sync active tab with sections in-view while scrolling (only on home page)
+  useEffect(() => {
 
     // Only observe sections on the current page (not on separate pages like /galeria)
     const isOnHomePage = pathname === '/'
@@ -160,15 +173,25 @@ export function NavBar({ items, className }: NavBarProps) {
           const Icon = item.icon
           const isActive = activeTab === item.name
           const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
-            if (item.url.startsWith("#")) {
+            // Set active tab immediately for better UX
+            setActiveTab(item.name)
+            
+            // Handle hash links (sections on home page)
+            if (item.url.includes("#")) {
               e.preventDefault()
-              const el = document.querySelector(item.url)
-              if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" })
-                history.pushState(null, "", item.url)
+              const hash = item.url.split('#')[1]
+              if (pathname === '/') {
+                // On home page, scroll to section
+                const el = document.querySelector(`#${hash}`)
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" })
+                  window.history.pushState(null, "", `#${hash}`)
+                }
+              } else {
+                // On other pages, navigate to home page with hash
+                window.location.href = `/#${hash}`
               }
             }
-            setActiveTab(item.name)
           }
 
           return (
