@@ -25,15 +25,12 @@ export function ContactSection() {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     e.stopPropagation()
     
-    console.log("Form submit handler called", { formData, isSubmitting })
-    
     // Prevent double submission
     if (isSubmitting) {
-      console.log("Already submitting, ignoring")
       return
     }
     
@@ -42,17 +39,7 @@ export function ContactSection() {
     const trimmedEmail = formData.email.trim()
     const trimmedPhone = formData.phone.trim()
     
-    console.log("Validating fields", { 
-      checkIn: formData.checkIn, 
-      checkOut: formData.checkOut, 
-      people: formData.people,
-      name: trimmedName,
-      email: trimmedEmail,
-      phone: trimmedPhone
-    })
-    
     if (!formData.checkIn || !formData.checkOut || !formData.people || !trimmedName || !trimmedEmail || !trimmedPhone) {
-      console.log("Validation failed - missing required fields")
       alert(t("fillAllFields"))
       return
     }
@@ -65,7 +52,6 @@ export function ContactSection() {
     }
 
     setIsSubmitting(true)
-    console.log("Setting isSubmitting to true")
     
     // Create email body with trimmed values
     const emailBody = `${t("askAvailability")}:
@@ -86,9 +72,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
     const body = encodeURIComponent(emailBody)
     const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${subject}&body=${body}`
     
-    console.log("Created mailto link:", mailtoLink.substring(0, 100) + "...")
-    
-    // Reset form immediately (before opening mailto)
+    // Reset form immediately
     setFormData({
       checkIn: "",
       checkOut: "",
@@ -99,76 +83,62 @@ ${t("message")}: ${formData.message.trim() || "-"}`
       message: "",
     })
     
-    console.log("Form data reset")
-    
-    // Open email client using multiple methods for maximum compatibility
-    let emailOpened = false
-    
+    // Open email client
     try {
-      // Method 1: Try creating a link and clicking it
-      console.log("Trying method 1: createElement and click")
       const link = document.createElement('a')
       link.href = mailtoLink
       link.style.display = 'none'
-      link.setAttribute('data-mailto', 'true')
       document.body.appendChild(link)
       link.click()
-      // Wait a bit before removing to ensure click is processed
       setTimeout(() => {
         if (document.body.contains(link)) {
           document.body.removeChild(link)
         }
       }, 100)
-      emailOpened = true
-      console.log("Method 1 executed")
-    } catch (error) {
-      console.error("Method 1 failed:", error)
-    }
-    
-    // Method 2: Fallback to window.location.href (only if method 1 didn't work)
-    if (!emailOpened) {
-      try {
-        console.log("Trying method 2: window.location.href")
-        // Use setTimeout to ensure the form reset happens first
-        setTimeout(() => {
-          window.location.href = mailtoLink
-        }, 100)
-        emailOpened = true
-        console.log("Method 2 executed")
-      } catch (error) {
-        console.error("Method 2 failed:", error)
-      }
-    }
-    
-    // Show success message and reset submitting state
-    setTimeout(() => {
-      console.log("Showing success message", { emailOpened })
-      setIsSubmitting(false)
-      if (emailOpened) {
+      
+      setTimeout(() => {
+        setIsSubmitting(false)
         alert(t("formSent"))
-      } else {
-        // If all methods failed, show error but still confirm form was processed
-        alert(t("formError"))
-      }
-    }, 500)
+      }, 300)
+    } catch (error) {
+      console.error("Error opening email:", error)
+      window.location.href = mailtoLink
+      setTimeout(() => {
+        setIsSubmitting(false)
+        alert(t("formSent"))
+      }, 500)
+    }
   }
 
   return (
-    <section id="kontakt" ref={ref as any} className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 relative z-[45] scroll-mt-24 pointer-events-auto">
-      <div className="container mx-auto px-4 sm:px-6 w-full pointer-events-auto">
-        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out pointer-events-auto ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+    <section 
+      id="kontakt" 
+      ref={ref as any} 
+      className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
+      style={{ position: 'relative', zIndex: 10 }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 20 }}>
+        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand">{t("contactTitle")}</h2>
           <p className="text-foreground/60 mt-2 sm:mt-3 text-sm sm:text-base md:text-lg">{t("contactSubtitle")}</p>
         </div>
 
-        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 pointer-events-auto">
+        <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8" style={{ position: 'relative', zIndex: 30 }}>
           {/* Contact Info */}
-          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 pointer-events-auto relative z-[55] mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
-            <a href="tel:+48501558530" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-[60] cursor-pointer shadow-sm hover:shadow-md">
+          <div className={`lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-1000 ease-out delay-200 mb-6 lg:mb-0 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
+            <a 
+              href="tel:+48501558530" 
+              className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition shadow-sm hover:shadow-md"
+              style={{ position: 'relative', zIndex: 40 }}
+            >
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("phone")}</div>
               <div className="mt-1 sm:mt-2 text-sm sm:text-base md:text-lg font-semibold break-all">+48 501 558 530</div>
             </a>
-            <a href="mailto:kontakt@szczyrkdom.pl" className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition touch-manipulation relative z-[60] cursor-pointer shadow-sm hover:shadow-md">
+            <a 
+              href="mailto:kontakt@szczyrkdom.pl" 
+              className="block rounded-xl sm:rounded-2xl border border-border bg-muted/50 p-3 sm:p-4 md:p-6 text-center text-foreground/90 hover:text-foreground hover:bg-muted active:bg-muted/80 transition shadow-sm hover:shadow-md"
+              style={{ position: 'relative', zIndex: 40 }}
+            >
               <div className="text-xs sm:text-sm uppercase tracking-wider">{t("email")}</div>
               <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-lg font-semibold break-all">kontakt@szczyrkdom.pl</div>
             </a>
@@ -179,8 +149,8 @@ ${t("message")}: ${formData.message.trim() || "-"}`
           </div>
 
           {/* Contact Form */}
-          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 pointer-events-auto relative z-[55] ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6 pointer-events-auto">
+          <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 40 }}>
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 <div>
                   <label htmlFor="checkIn" className="block text-xs sm:text-sm font-medium text-foreground mb-1.5 sm:mb-2">
@@ -311,5 +281,3 @@ ${t("message")}: ${formData.message.trim() || "-"}`
     </section>
   )
 }
-
-
