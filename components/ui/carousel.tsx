@@ -6,6 +6,7 @@ interface SlideData {
   title: string;
   button: string;
   src: string;
+  onClick?: () => void;
 }
 
 interface CarouselProps {
@@ -34,11 +35,11 @@ export function Carousel({ slides }: CarouselProps) {
   const id = useId();
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
+    <div className="relative w-full max-w-6xl mx-auto overflow-x-hidden">
       {/* Main carousel container */}
       <div className="relative overflow-hidden rounded-2xl bg-gray-100">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex transition-transform duration-500 ease-in-out will-change-transform"
           style={{
             transform: `translateX(-${current * 100}%)`,
           }}
@@ -47,7 +48,7 @@ export function Carousel({ slides }: CarouselProps) {
             <div
               key={index}
               className="w-full flex-shrink-0 relative"
-              style={{ height: '400px' }}
+              style={{ height: '600px', minWidth: '100%' }}
             >
               <div className="relative w-full h-full">
                 <img
@@ -63,7 +64,13 @@ export function Carousel({ slides }: CarouselProps) {
                     {slide.title}
                   </h3>
                   <button
-                    onClick={() => handleSlideClick(index)}
+                    onClick={() => {
+                      if (slide.onClick) {
+                        slide.onClick();
+                      } else {
+                        handleSlideClick(index);
+                      }
+                    }}
                     className="px-6 py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 transition-colors"
                   >
                     {slide.button}

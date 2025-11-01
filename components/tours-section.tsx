@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { useI18n } from "@/components/ui/lang"
 import { useInView } from "@/lib/use-in-view"
+import { useRouter } from "next/navigation"
 
 const features = [
   {
@@ -34,6 +35,7 @@ const features = [
 export function ToursSection() {
   const { ref, inView } = useInView({ threshold: 0.15, once: true })
   const { t } = useI18n()
+  const router = useRouter()
   return (
     <section id="udogodnienia" ref={ref as any} className="h-screen bg-white flex items-center">
       <div className="container mx-auto px-6">
@@ -50,6 +52,7 @@ export function ToursSection() {
               key={feature.id}
               className={`group relative overflow-hidden bg-transparent border-none cursor-pointer transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}
               style={{ transitionDelay: `${index * 200 + 500}ms` }}
+              onClick={() => router.push("/galeria")}
             >
               <div className="relative h-[400px] overflow-hidden">
                 <img
