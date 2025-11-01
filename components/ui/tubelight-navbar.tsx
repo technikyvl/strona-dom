@@ -139,7 +139,8 @@ export function NavBar({ items, className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
+        "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-3 sm:mb-0 sm:pt-6",
+        "px-2 sm:px-0",
         className,
       )}
     >
@@ -154,14 +155,14 @@ export function NavBar({ items, className }: NavBarProps) {
       />
       <motion.div
         className={cn(
-          "flex items-center gap-3 text-foreground border border-border rounded-full shadow-lg ring-1 font-lexend uppercase tracking-wide",
+          "flex items-center gap-1.5 sm:gap-3 text-foreground border border-border rounded-full shadow-lg ring-1 font-lexend uppercase tracking-wide",
           "backdrop-blur-xl supports-[backdrop-filter]:bg-white/40 bg-white/60",
         )}
         animate={{
-          paddingLeft: compact ? 8 : 10,
-          paddingRight: compact ? 8 : 10,
-          paddingTop: compact ? 6 : 8,
-          paddingBottom: compact ? 6 : 8,
+          paddingLeft: compact ? (isMobile ? 6 : 8) : (isMobile ? 8 : 10),
+          paddingRight: compact ? (isMobile ? 6 : 8) : (isMobile ? 8 : 10),
+          paddingTop: compact ? (isMobile ? 5 : 6) : (isMobile ? 6 : 8),
+          paddingBottom: compact ? (isMobile ? 5 : 6) : (isMobile ? 6 : 8),
           boxShadow: compact ? "0 10px 25px rgba(255,165,0,0.12)" : "0 15px 35px rgba(255,165,0,0.18)",
           opacity: compact ? 0.95 : 1,
           borderColor: compact ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.5)",
@@ -218,13 +219,15 @@ export function NavBar({ items, className }: NavBarProps) {
                 isActive && "bg-primary/15 text-foreground",
               )}
               style={{
-                padding: compact ? "0.5rem 0.9rem" : "0.65rem 1.5rem",
+                padding: compact 
+                  ? (isMobile ? "0.4rem 0.7rem" : "0.5rem 0.9rem")
+                  : (isMobile ? "0.5rem 0.8rem" : "0.65rem 1.5rem"),
                 fontSize: compact ? "0.9rem" : "0.95rem",
               }}
             >
               <span className="hidden md:inline">{item.name}</span>
               <span className="md:hidden">
-                <Icon size={compact ? 18 : 22} strokeWidth={2.5} />
+                <Icon size={compact ? (isMobile ? 16 : 18) : (isMobile ? 18 : 22)} strokeWidth={2.5} />
               </span>
               {isActive && (
                 <motion.div

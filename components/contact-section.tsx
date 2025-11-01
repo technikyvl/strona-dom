@@ -114,7 +114,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
     <section 
       id="kontakt" 
       ref={ref as any} 
-      className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
+      className="min-h-screen bg-white flex items-center py-8 pb-20 sm:pb-12 md:pb-16 lg:pb-20 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
       style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}
     >
       <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}>

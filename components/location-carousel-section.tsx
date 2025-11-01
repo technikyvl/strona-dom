@@ -63,7 +63,7 @@ export function LocationCarouselSection() {
     <section 
       id="lokalizacja" 
       ref={ref as any} 
-      className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
+      className="min-h-screen bg-white flex items-center py-8 pb-20 sm:pb-12 md:pb-16 lg:pb-20 sm:py-12 md:py-16 lg:py-20 scroll-mt-24"
       style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}
     >
       <div className="container mx-auto px-4 sm:px-6 w-full" style={{ position: 'relative', zIndex: 101, pointerEvents: 'auto' }}>
@@ -71,7 +71,7 @@ export function LocationCarouselSection() {
         <div className={`text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`}>
           <p className="text-foreground/60 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">{t("locationTitle")}</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand mb-3 sm:mb-4 md:mb-6 lg:mb-8 px-4">
-            Szczyrk – blisko stoków i szlaków
+            {t("locationTitle")}
           </h2>
           <p className="text-foreground/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
             {t("locationDescription")}
