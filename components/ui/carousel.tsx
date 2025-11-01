@@ -92,13 +92,13 @@ export function Carousel({ slides }: CarouselProps) {
                   src={slide.src}
                   alt={slide.title}
                   className="w-full h-full object-cover"
-                  style={{ pointerEvents: 'none' }}
+                  style={{ pointerEvents: 'none', userSelect: 'none' }}
                 />
                 <div className="absolute inset-0 bg-black/40 sm:bg-black/40" style={{ pointerEvents: 'none' }} />
                 
-                {/* Content overlay */}
+                {/* Content overlay - with explicit pointer-events handling */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-8 text-center" style={{ pointerEvents: 'none', zIndex: 10 }}>
-                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-3 sm:mb-4 px-2 sm:px-4 max-w-[90%]" style={{ pointerEvents: 'none' }}>
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-3 sm:mb-4 px-2 sm:px-4 max-w-[90%]" style={{ pointerEvents: 'none', userSelect: 'none' }}>
                     {slide.title}
                   </h3>
                   <button
@@ -112,8 +112,28 @@ export function Carousel({ slides }: CarouselProps) {
                         handleSlideClick(index);
                       }
                     }}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onMouseUp={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (slide.onClick) {
+                        slide.onClick();
+                      } else {
+                        handleSlideClick(index);
+                      }
+                    }}
                     className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer touch-manipulation text-xs sm:text-sm md:text-base shadow-lg min-h-[40px] sm:min-h-[44px]"
-                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 250, cursor: 'pointer' }}
+                    style={{ 
+                      pointerEvents: 'auto', 
+                      position: 'relative', 
+                      zIndex: 999,
+                      cursor: 'pointer',
+                      WebkitUserSelect: 'none',
+                      userSelect: 'none'
+                    }}
                   >
                     {slide.button}
                   </button>

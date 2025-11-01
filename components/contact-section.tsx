@@ -150,7 +150,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
 
           {/* Contact Form */}
           <div className={`lg:col-span-2 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-0"}`} style={{ position: 'relative', zIndex: 103, pointerEvents: 'auto' }}>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6" style={{ pointerEvents: 'auto' }}>
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6" style={{ pointerEvents: 'auto', position: 'relative', zIndex: 200 }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 <div>
                   <label htmlFor="checkIn" className="block text-xs sm:text-sm font-medium text-foreground mb-1.5 sm:mb-2">
@@ -165,6 +165,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                     required
                     min={new Date().toISOString().split('T')[0]}
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm sm:text-base touch-manipulation min-h-[44px]"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'pointer' }}
                   />
                 </div>
                 <div>
@@ -180,6 +181,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                     required
                     min={formData.checkIn || new Date().toISOString().split('T')[0]}
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm sm:text-base touch-manipulation min-h-[44px]"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'pointer' }}
                   />
                 </div>
               </div>
@@ -196,6 +198,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer text-sm sm:text-base touch-manipulation min-h-[44px]"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'pointer' }}
                   >
                     <option value="">{t("selectPeople")}</option>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
@@ -217,6 +220,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm sm:text-base touch-manipulation min-h-[44px]"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'text' }}
                   />
                 </div>
               </div>
@@ -234,6 +238,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm sm:text-base touch-manipulation min-h-[44px]"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'text' }}
                   />
                 </div>
                 <div>
@@ -248,6 +253,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm sm:text-base touch-manipulation min-h-[44px]"
+                    style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'text' }}
                   />
                 </div>
               </div>
@@ -264,6 +270,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                   rows={4}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none transition-all text-sm sm:text-base touch-manipulation"
                   placeholder={t("additionalInfo")}
+                  style={{ pointerEvents: 'auto', position: 'relative', zIndex: 300, cursor: 'text' }}
                 />
               </div>
 
@@ -271,6 +278,7 @@ ${t("message")}: ${formData.message.trim() || "-"}`
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full py-3 sm:py-3.5 px-5 sm:px-6 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 active:bg-primary/95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg text-sm sm:text-base touch-manipulation min-h-[48px] sm:min-h-[52px] mt-2 sm:mt-4"
+                style={{ pointerEvents: 'auto', position: 'relative', zIndex: 400, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
               >
                 {isSubmitting ? t("sending") : t("sendInquiry")}
               </button>
