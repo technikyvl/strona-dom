@@ -27,39 +27,52 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!formData.checkIn || !formData.checkOut || !formData.people || !formData.name || !formData.email || !formData.phone) {
+      alert("Proszę wypełnić wszystkie wymagane pola")
+      return
+    }
+
     setIsSubmitting(true)
     
     // Create email body
-    const emailBody = `
-Nowe zapytanie o dostępność:
-${"\n"}
+    const emailBody = `Nowe zapytanie o dostępność:
+
 Data przyjazdu: ${formData.checkIn}
 Data wyjazdu: ${formData.checkOut}
 Liczba osób: ${formData.people}
-${"\n"}
+
 Dane kontaktowe:
 Imię i nazwisko: ${formData.name}
 Email: ${formData.email}
 Telefon: ${formData.phone}
-${"\n"}
-Wiadomość: ${formData.message || "Brak"}
-    `.trim()
 
-    // Open email client
-    window.location.href = `mailto:kontakt@szczyrkdom.pl?subject=Zapytanie o dostępność&body=${encodeURIComponent(emailBody)}`
-    
-    setTimeout(() => {
+Wiadomość: ${formData.message || "Brak"}`
+
+    try {
+      // Open email client
+      const mailtoLink = `mailto:kontakt@szczyrkdom.pl?subject=${encodeURIComponent("Zapytanie o dostępność")}&body=${encodeURIComponent(emailBody)}`
+      window.location.href = mailtoLink
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setFormData({
+          checkIn: "",
+          checkOut: "",
+          people: "",
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        })
+        alert("Formularz został wysłany. Sprawdź swoją skrzynkę pocztową.")
+      }, 500)
+    } catch (error) {
+      console.error("Błąd podczas wysyłania formularza:", error)
       setIsSubmitting(false)
-      setFormData({
-        checkIn: "",
-        checkOut: "",
-        people: "",
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      })
-    }, 1000)
+      alert("Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.")
+    }
   }
 
   return (

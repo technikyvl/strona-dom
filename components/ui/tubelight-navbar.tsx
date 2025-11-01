@@ -3,6 +3,7 @@
 import React, { MouseEvent, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -18,6 +19,7 @@ interface NavBarProps {
 }
 
 export function NavBar({ items, className }: NavBarProps) {
+  const pathname = usePathname()
   const [activeTab, setActiveTab] = useState(items[0]?.name ?? "")
   const [isMobile, setIsMobile] = useState(false)
   const [compact, setCompact] = useState(false)
@@ -32,24 +34,48 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  // Sync active tab with hash on load and section in-view while scrolling
+  // Sync active tab with pathname or hash on load and section in-view while scrolling
   useEffect(() => {
-    // initial from hash
-    const hash = typeof window !== 'undefined' ? window.location.hash : ''
-    if (hash) {
-      const found = items.find(i => i.url === hash)
-      if (found) setActiveTab(found.name)
+    // Check pathname first (for pages like /galeria)
+    const pathMatch = items.find(i => {
+      // Check exact match or if pathname matches the URL
+      if (i.url === pathname || pathname?.startsWith(i.url.split('#')[0])) {
+        return true
+      }
+      return false
+    })
+    
+    if (pathMatch) {
+      setActiveTab(pathMatch.name)
+    }
+    
+    // Check hash for home page sections (only if on home page)
+    if (pathname === '/') {
+      const hash = typeof window !== 'undefined' ? window.location.hash : ''
+      if (hash) {
+        const hashMatch = items.find(i => i.url.includes(hash) || i.url.endsWith(hash))
+        if (hashMatch) {
+          setActiveTab(hashMatch.name)
+        }
+      }
     }
 
+    // Only observe sections on the current page (not on separate pages like /galeria)
+    const isOnHomePage = pathname === '/'
+    
     const sectionIds = items
-      .map(i => (i.url.startsWith('#') ? i.url.slice(1) : ''))
+      .map(i => {
+        // Extract hash from URL like "/#dom" or "#dom"
+        const hashMatch = i.url.match(/#(.+)$/)
+        return hashMatch ? hashMatch[1] : ''
+      })
       .filter(Boolean)
 
     const sections = sectionIds
       .map(id => document.getElementById(id))
       .filter((el): el is Element => Boolean(el))
 
-    if (sections.length === 0) return
+    if (sections.length === 0 || !isOnHomePage) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,7 +85,10 @@ export function NavBar({ items, className }: NavBarProps) {
         }
         if (best && best.isIntersecting) {
           const id = (best.target as HTMLElement).id
-          const match = items.find(i => i.url === `#${id}`)
+          const match = items.find(i => {
+            const hashMatch = i.url.match(/#(.+)$/)
+            return hashMatch && hashMatch[1] === id
+          })
           if (match) setActiveTab(match.name)
         }
       },
@@ -71,14 +100,21 @@ export function NavBar({ items, className }: NavBarProps) {
       sections.forEach(s => observer.unobserve(s))
       observer.disconnect()
     }
-  }, [items])
+  }, [items, pathname])
 
   // Compact mode on scroll (shrink and soften but keep visible)
   // Compact mode with hysteresis to avoid jitter
   useEffect(() => {
+    let ticking = false
     const onScroll = () => {
-      const y = window.scrollY
-      setCompact(prev => (prev ? y > 60 : y > 120))
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY
+          setCompact(prev => (prev ? y > 60 : y > 120))
+          ticking = false
+        })
+        ticking = true
+      }
     }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -116,8 +152,9 @@ export function NavBar({ items, className }: NavBarProps) {
           boxShadow: compact ? "0 10px 25px rgba(255,165,0,0.12)" : "0 15px 35px rgba(255,165,0,0.18)",
           opacity: compact ? 0.95 : 1,
           borderColor: compact ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.5)",
+          scale: compact ? 0.95 : 1,
         }}
-        transition={{ type: "spring", stiffness: 260, damping: 30 }}
+        transition={{ type: "spring", stiffness: 300, damping: 35, duration: 0.3 }}
       >
         {items.map((item) => {
           const Icon = item.icon

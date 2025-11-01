@@ -17,8 +17,8 @@ const lexend = Lexend_Deca({
 })
 
 export const metadata: Metadata = {
-  title: "Visit Tokyo - Travel Tours",
-  description: "Discover the beauty of Tokyo with our exclusive travel tours",
+  title: "Highlander House Szczyrk",
+  description: "Dom w Szczyrku - blisko stoków i szlaków. Sprawdź dostępność i zarezerwuj swój pobyt.",
   generator: "v0.app",
 }
 
