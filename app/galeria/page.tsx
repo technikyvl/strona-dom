@@ -6,7 +6,7 @@ import { useI18n } from "@/components/ui/lang";
 import { useInView } from "@/lib/use-in-view";
 import Image from "next/image";
 
-export default function GalleryPage() {
+function GalleryContent() {
   const { t } = useI18n();
   const { ref, inView } = useInView({ threshold: 0.1, once: true });
 
@@ -41,44 +41,52 @@ export default function GalleryPage() {
   ];
 
   return (
+    <>
+      <NavBarClient />
+      <section ref={ref as any} className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          {/* Header */}
+          <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-serif-brand mb-4">
+              Galeria
+            </h1>
+            <p className="text-foreground/60 text-lg max-w-2xl mx-auto">
+              Zobacz więcej zdjęć naszego domu i wnętrz
+            </p>
+          </div>
+
+          {/* Gallery Grid */}
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            {galleryImages.map((image, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-2xl aspect-square cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default function GalleryPage() {
+  return (
     <main className="min-h-screen bg-background">
       <I18nRoot>
-        <NavBarClient />
-        <section ref={ref as any} className="py-20 bg-white">
-          <div className="container mx-auto px-6">
-            {/* Header */}
-            <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-serif-brand mb-4">
-                Galeria
-              </h1>
-              <p className="text-foreground/60 text-lg max-w-2xl mx-auto">
-                Zobacz więcej zdjęć naszego domu i wnętrz
-              </p>
-            </div>
-
-            {/* Gallery Grid */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-              {galleryImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="group relative overflow-hidden rounded-2xl aspect-square cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  style={{ transitionDelay: `${index * 50}ms` }}
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <GalleryContent />
       </I18nRoot>
     </main>
   );
