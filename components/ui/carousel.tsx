@@ -80,7 +80,11 @@ export function Carousel({ slides }: CarouselProps) {
             <div
               key={index}
               className="w-full flex-shrink-0 relative"
-              style={{ height: 'min(600px, 70vh)', minWidth: '100%' }}
+              style={{ 
+                height: 'min(400px, 60vh)', // Smaller on mobile
+                minHeight: '350px', // Minimum height for mobile
+                minWidth: '100%' 
+              }}
             >
               <div className="relative w-full h-full">
                 <img
@@ -88,11 +92,11 @@ export function Carousel({ slides }: CarouselProps) {
                   alt={slide.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/40 sm:bg-black/40" />
                 
                 {/* Content overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 sm:p-8 text-center">
-                  <h3 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-8 text-center z-10">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-3 sm:mb-4 px-2 sm:px-4 max-w-[90%]">
                     {slide.title}
                   </h3>
                   <button
@@ -106,7 +110,7 @@ export function Carousel({ slides }: CarouselProps) {
                         handleSlideClick(index);
                       }
                     }}
-                    className="px-5 py-2.5 sm:px-6 sm:py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer touch-manipulation text-sm sm:text-base"
+                    className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer touch-manipulation text-xs sm:text-sm md:text-base shadow-lg min-h-[40px] sm:min-h-[44px]"
                   >
                     {slide.button}
                   </button>
@@ -118,7 +122,7 @@ export function Carousel({ slides }: CarouselProps) {
       </div>
 
       {/* Navigation controls */}
-      <div className="flex justify-center items-center mt-4 sm:mt-6 space-x-3 sm:space-x-4 px-4">
+      <div className="flex justify-center items-center mt-3 sm:mt-4 md:mt-6 space-x-2 sm:space-x-3 md:space-x-4 px-2 sm:px-4">
         <button
           type="button"
           onClick={(e) => {
@@ -126,15 +130,15 @@ export function Carousel({ slides }: CarouselProps) {
             e.stopPropagation()
             handlePreviousClick()
           }}
-          className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-full transition-colors touch-manipulation"
+          className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/90 hover:bg-white active:bg-gray-100 rounded-full transition-colors touch-manipulation shadow-md border border-gray-200 z-20"
           title={t("carouselPreviousSlide")}
           aria-label={t("carouselPreviousSlide")}
         >
-          <IconArrowNarrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 rotate-180" />
+          <IconArrowNarrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-700 rotate-180" />
         </button>
 
         {/* Dots indicator */}
-        <div className="flex space-x-1.5 sm:space-x-2 flex-wrap justify-center gap-y-1">
+        <div className="flex space-x-1.5 sm:space-x-2 flex-wrap justify-center gap-y-1 mx-2">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -144,7 +148,7 @@ export function Carousel({ slides }: CarouselProps) {
                 e.stopPropagation()
                 setCurrent(index)
               }}
-              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors touch-manipulation ${
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors touch-manipulation min-w-[10px] min-h-[10px] ${
                 current === index ? 'bg-gray-800' : 'bg-gray-300'
               }`}
               aria-label={`${t("carouselPreviousSlide")} ${index + 1}`}
@@ -159,11 +163,11 @@ export function Carousel({ slides }: CarouselProps) {
             e.stopPropagation()
             handleNextClick()
           }}
-          className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-full transition-colors touch-manipulation"
+          className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/90 hover:bg-white active:bg-gray-100 rounded-full transition-colors touch-manipulation shadow-md border border-gray-200 z-20"
           title={t("carouselNextSlide")}
           aria-label={t("carouselNextSlide")}
         >
-          <IconArrowNarrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
+          <IconArrowNarrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-700" />
         </button>
       </div>
     </div>

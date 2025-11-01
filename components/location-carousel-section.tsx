@@ -48,12 +48,12 @@ export function LocationCarouselSection() {
   ];
 
   return (
-    <section id="lokalizacja" ref={ref as any} className="min-h-screen bg-white flex items-center py-12 sm:py-16 md:py-20 relative z-10 scroll-mt-24">
+    <section id="lokalizacja" ref={ref as any} className="min-h-screen bg-white flex items-center py-8 sm:py-12 md:py-16 lg:py-20 relative z-30 scroll-mt-24">
       <div className="container mx-auto px-4 sm:px-6 w-full">
         {/* Section Header */}
-        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className={`text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <p className="text-foreground/60 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">{t("locationTitle")}</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground font-serif-brand mb-4 sm:mb-6 md:mb-8 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif-brand mb-3 sm:mb-4 md:mb-6 lg:mb-8 px-4">
             Szczyrk – blisko stoków i szlaków
           </h2>
           <p className="text-foreground/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
@@ -62,7 +62,7 @@ export function LocationCarouselSection() {
         </div>
 
         {/* Carousel */}
-        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-20`}>
+        <div className={`transition-all duration-1000 ease-out delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} relative z-40`}>
           <Carousel slides={houseSlides} />
         </div>
       </div>

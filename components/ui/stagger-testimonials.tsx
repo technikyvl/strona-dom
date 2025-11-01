@@ -23,7 +23,8 @@ function SmallCard({ t, testimonialText }: { t: typeof testimonials[number], tes
     <div className={cn(
       "shrink-0 w-[280px] md:w-[340px] h-[90px] md:h-[110px]",
       "rounded-2xl border border-black/10 bg-white/80 backdrop-blur-xl text-black",
-      "ring-1 ring-black/5 shadow-lg shadow-black/10 px-4 py-3 mr-3 md:mr-4"
+      "ring-1 ring-black/5 shadow-lg shadow-black/10 px-4 py-3 mr-3 md:mr-4",
+      "pointer-events-none"
     )}>
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
@@ -50,15 +51,15 @@ export const StaggerTestimonials: React.FC = () => {
   const { t } = useI18n();
 
   return (
-    <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px]">
-      <div className="relative" style={{ height: laneHeight }}>
-        <div className="container mx-auto px-6 mb-2">
-          <span className="inline-block text-white/90 text-xs uppercase tracking-wider pl-1 pr-2 py-1 bg-black/20 backdrop-blur-sm rounded-md">
+    <div className="relative z-10 w-full overflow-hidden bg-transparent mt-[-120px] md:mt-[-160px] pointer-events-none">
+      <div className="relative pointer-events-none" style={{ height: laneHeight }}>
+        <div className="container mx-auto px-6 mb-2 pointer-events-none">
+          <span className="inline-block text-white/90 text-xs uppercase tracking-wider pl-1 pr-2 py-1 bg-black/20 backdrop-blur-sm rounded-md pointer-events-none">
             {t("googleReviews")}
           </span>
         </div>
-        <div className="absolute inset-0">
-          <div className="marquee-track">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="marquee-track pointer-events-none">
             {loop.map((testimonial, i) => (
               <SmallCard key={`${testimonial.tempId}-${i}`} t={testimonial} testimonialText={t(testimonial.testimonialKey as any)} />
             ))}
